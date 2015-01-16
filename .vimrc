@@ -10,3 +10,6 @@ filetype plugin on
 syntax on
 filetype indent on
 command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist
+if has("autocmd")
+  autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+endif
