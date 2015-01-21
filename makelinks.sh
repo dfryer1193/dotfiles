@@ -17,3 +17,4 @@ makelink() {
 
 makelink .bashrc
 makelink .vimrc
+makelink .config/aurgetrc
