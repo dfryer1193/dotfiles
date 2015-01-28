@@ -18,3 +18,4 @@ makelink() {
 makelink .bashrc
 makelink .vimrc
 makelink .config/aurgetrc
+makelink .config/compton.conf
