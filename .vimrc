@@ -13,6 +13,7 @@ Plugin 'scrooloose/syntastic'
 Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-surround'
 Plugin 'Shougo/neocomplete.vim'
+Plugin 'tpope/vim-fugitive'
 
 call vundle#end()
 
