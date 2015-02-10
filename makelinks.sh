@@ -17,5 +17,7 @@ makelink() {
 
 makelink .bashrc
 makelink .vimrc
+echo "If you get errors when starting vim, make sure you have Vundle installed"
+echo "with \"git clone https://github.com/gmarik/Vundle.vim ~/.vim/bundle/Vundle.vim\""
 makelink .config/aurgetrc
 makelink .config/compton.conf
