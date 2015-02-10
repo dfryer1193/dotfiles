@@ -6,7 +6,7 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls -l --color=auto'
-alias less='less -R'
+alias less='less -Rr'
 alias clc='clear'
 alias qq='exit'
 alias aursearch='aurget -Ss'
