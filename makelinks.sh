@@ -21,3 +21,5 @@ makelink .bashrc
 makelink .vimrc
 makelink .config/aurgetrc
 makelink .config/compton.conf
+makelink .vim/bundle/vim-airline/autoload/airline/themes/murmur_modified.vim
+
