@@ -5,12 +5,14 @@ create_msg() { echo "[ CREATE ] $@"; }
 exists_msg() { echo "[ EXISTS ] $@"; }
 
 makelink() {
-  fname=$HOME/$1
+  lname=$1
+  fname=$HOME/$lname
   if [[ ! -e $fname ]]; then
     if [[ ! -e ${fname%/*} ]]; then
       mkdir -p ${fname%/*}
     fi
-    ln -s $HOME/dotfiles/${fname##*/} $fname
+    #echo $lname :: $fname 
+    ln -s $HOME/dotfiles/$lname $fname
     create_msg "$fname"
   else
     exists_msg "$fname"
@@ -21,5 +23,5 @@ makelink .bashrc
 makelink .vimrc
 makelink .config/aurgetrc
 makelink .config/compton.conf
-makelink .vim/bundle/vim-airline/autoload/airline/themes/murmur_modified.vim
+makelink .vim/autoload/airline/themes/murmur_modified.vim
 
