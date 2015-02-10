@@ -18,6 +18,7 @@ alias pamcan='pacman'
 alias upgrade='sudo pacman -Syu; aurupgr'
 alias update='upgrade'
 alias tree='tree -C'
+alias noblank='xset s off -dpms; xset s noblank'
 
 export EDITOR=vim visudo
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
