@@ -26,6 +26,7 @@ set autoindent
 set mouse=a
 set t_Co=256
 set timeoutlen=50
+set laststatus=2
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -52,7 +53,7 @@ let g:syntastic_check_on_wq=0
 
 " disable AutoComplPop
 let g:acp_enableAtStartup=0
-" use neocomplete
+" use neocomplete on startup, comment if vim < 7.3 || -lua
 let g:neocomplete#enable_at_startup=1
 " use smartcase
 let g:neocomplete#enable_smart_case=1
