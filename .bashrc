@@ -124,7 +124,7 @@ set_prompt(){
     last_cmd_stat=$wrong
   fi
   
-  gitstring=$(__git_ps1 " (%s $(get_sha))")
+  gitstring=$(__git_ps1 "(%s $(get_sha))")
 
   PS1="$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
   PS1=$PS1"$midLside$reset`if [ -e /sys/class/power_supply/BAT1 ]; then echo $(battery_status);fi;` $textcolor\A \w\n"
