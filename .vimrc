@@ -24,6 +24,8 @@ set expandtab
 set smarttab
 set number
 set autoindent
+set pastetoggle=<F2>
+set title
 set mouse=a
 set t_Co=256
 set timeoutlen=50
@@ -35,6 +37,19 @@ set statusline+=%*
 filetype plugin on
 syntax on
 filetype indent on
+
+vmap Q gq
+nmap Q gqap
+
+nnoremap j gj
+nnoremap <Down> gj 
+nnoremap k gk
+nnoremap <Up> gk
+nnoremap <C-q> ,/ :nohlsearch<CR>
+nnoremap <C-Left> <C-w>h
+nnoremap <C-Right> <C-w>l
+nnoremap <C-Up> <C-w>k
+nnoremap <C-Down> <C-w>j
 
 command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist
 command! -nargs=* TNT NERDTreeTabsToggle
