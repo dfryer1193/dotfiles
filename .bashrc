@@ -19,11 +19,21 @@ alias upgrade='sudo pacman -Syu; aurupgr'
 alias update='upgrade'
 alias tree='tree -C'
 alias noblank='xset s off -dpms; xset s noblank'
+alias sudo='sudo '
 
 export HISTSIZE=10000
 export EDITOR=vim visudo
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
+
+# make git PS1 available
+source /usr/share/git/git-prompt.sh
+# allow git-prompt.sh to show git statuses
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUNTRACKEDFILES=1
+export GIT_PS1_SHOWCOLORHINTS=1
+export GIT_PS1_SHOWUPSTREAM=auto
 
 #if [[ $? -ne 0 ]]; then
 #	PS1="┌\e[1;31m[\u@\h \$]\e[0m\n├\W\n└─(\e[1;31m✗\e[0m)\$>"
@@ -31,89 +41,98 @@ export PATH="$HOME/scripts:$HOME/.bin:$PATH"
 #	PS1="┌\e[1;32m[\u@\h \$]\e[0m\n├\W\n└─(\e[1;32m✓\e[0m)\$>"
 #fi
 
-battery_status()
-{
-        BATTERY=/sys/class/power_supply/BAT1
+get_sha(){
+  git rev-parse --short HEAD 2>/dev/null
+}
+
+battery_status(){
+  BATTERY=/sys/class/power_supply/BAT1
  
-        CHARGE=`cat $BATTERY/capacity`
-        BATSTATE=`cat $BATTERY/status`
-        # Colors for humans
-        NON='\033[00m'
-        BLD='\033[01m'
-        RED='\033[01;31m'
-        GRN='\033[01;32m'
-        YEL='\033[01;33m'
+  CHARGE=`cat $BATTERY/capacity`
+  BATSTATE=`cat $BATTERY/status`
+  # Colors for humans
+  NON='\033[00m'
+  BLD='\033[01m'
+  RED='\033[01;31m'
+  GRN='\033[01;32m'
+  YEL='\033[01;33m'
  
-        COLOUR="$RED"
+  COLOUR="$RED"
  
-        case "${BATSTATE}" in
-           'Charged')
-           BATSTT="$BLD=$NON"
-           ;;
-           'Charging')
-           BATSTT="$BLD+$NON"
-           ;;
-           'Discharging')
-           BATSTT="$BLD-$NON"
-           ;;
-        esac
+  case "${BATSTATE}" in
+     'Charged')
+     BATSTT="$BLD=$NON"
+     ;;
+     'Charging')
+     BATSTT="$BLD+$NON"
+     ;;
+     'Discharging')
+     BATSTT="$BLD-$NON"
+     ;;
+  esac
  
-        # prevent a charge of more than 100% displaying
-        if [ "$CHARGE" -gt "99" ]
-        then
-           CHARGE=100
-        fi
+  # prevent a charge of more than 100% displaying
+  if [ "$CHARGE" -gt "99" ]
+  then
+     CHARGE=100
+  fi
  
-        # prevent an error if the battery is not in the laptop (e.g. you have two and take out the primary)
-        STATE=`cat $BATTERY/present`
-         if [ "$STATE" == '0' ]
-        then
-                echo -e "${RED}nobat"
-        exit
-        fi
+  # prevent an error if the battery is not in the laptop (e.g. you have two and take out the primary)
+  STATE=`cat $BATTERY/present`
+   if [ "$STATE" == '0' ]
+  then
+          echo -e "${RED}nobat"
+  exit
+  fi
  
-        if [ "$CHARGE" -gt "15" ]
-        then
-           COLOUR="$YEL"
-        fi
+  if [ "$CHARGE" -gt "15" ]
+  then
+     COLOUR="$YEL"
+  fi
  
-        if [ "$CHARGE" -gt "30" ]
-        then
-           COLOUR="$GRN"
-        fi
-        echo -e "${BATSTT}${COLOUR}${CHARGE}%${NON}"
+  if [ "$CHARGE" -gt "30" ]
+  then
+     COLOUR="$GRN"
+  fi
+  echo -e "${BATSTT}${COLOUR}${CHARGE}%${NON}"
 }
 
 set_prompt(){
-	last_cmd=$?
-	boldRed='\[\e[1;31m\]'
-	boldGrn='\[\e[1;32m\]'
-	txtRed='\[\e[0;31m\]'
-	reset='\[\e[0m\]'
-	topLCorner='\342\224\214'
-	midLside='\342\224\234'
-	btmLCorner='\342\224\224'
-	btmDash='\342\224\200'
-	check='\342\234\223'
-	wrong='\342\234\227'
-        bold='\[\e[1;'
-        red='31m\]'
-        grn='32m\]'
-        color=$grn
-        last_cmd_stat=$check
-        textcolor=$reset
+  last_cmd=$?
+  boldRed='\[\e[1;31m\]'
+  boldGrn='\[\e[1;32m\]'
+  txtRed='\[\e[0;31m\]'
+  reset='\[\e[0m\]'
+  topLCorner='\342\224\214'
+  midLside='\342\224\234'
+  btmLCorner='\342\224\224'
+  btmDash='\342\224\200'
+  check='\342\234\223'
+  wrong='\342\234\227'
+  bold='\[\e[1;'
+  red='31m\]'
+  grn='32m\]'
+  color=$grn
+  last_cmd_stat=$check
+  textcolor=$reset
 	if [[ $last_cmd == 0 ]]; then
-                color=$grn
-                textcolor=$reset
-                last_cmd_stat=$check
+    color=$grn
+    textcolor=$reset
+    last_cmd_stat=$check
 	else
-                color=$red
-                textcolor=$txtRed
-                last_cmd_stat=$wrong
-	fi
-        PS1="$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
-        PS1=$PS1"$midLside$reset`if [ -e /sys/class/power_supply/BAT1 ]; then echo $(battery_status);fi;` $textcolor\A \w\n"
-        PS1=$PS1"$btmLCorner$btmDash($bold$color$last_cmd_stat$textcolor)\#\$>$reset "
+    color=$red
+    textcolor=$txtRed
+    last_cmd_stat=$wrong
+  fi
+  
+  gitstring=$(__git_ps1 "(%s $(get_sha))")
+
+  PS1="$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
+  PS1=$PS1"$midLside$reset`if [ -e /sys/class/power_supply/BAT1 ]; then echo $(battery_status);fi;` $textcolor\A \w\n"
+  if [[ ! -z ${gitstring// } ]]; then
+    PS1=$PS1"$midLside${gitstring}\n"
+  fi
+  PS1=$PS1"$btmLCorner$btmDash($bold$color$last_cmd_stat$textcolor)\#\$>$reset "
 }
 PROMPT_COMMAND='set_prompt'
 
