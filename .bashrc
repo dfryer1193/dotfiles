@@ -22,6 +22,7 @@ alias tree='tree -C'
 alias noblank='xset s off -dpms; xset s noblank'
 alias sudo='sudo '
 
+export HISTSIZE=10000
 export EDITOR=vim visudo
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
