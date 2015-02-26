@@ -23,9 +23,11 @@ set softtabstop=2
 set expandtab
 set smarttab
 set number
+set cursorline
 set autoindent
 set pastetoggle=<F2>
 set title
+set exrc
 set mouse=a
 set t_Co=256
 set timeoutlen=50
@@ -125,6 +127,8 @@ endif
 " For perlomni.vim setting.
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl='\h\w*->\h\w*\|\h\w*::'
+
+highlight Search ctermbg=000
 
 if has("autocmd")
   autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
