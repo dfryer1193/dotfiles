@@ -32,6 +32,9 @@ ignore_packages=''
 # discard sources for development packages.
 keep_devels=true
 
+# Should check and update development packages
+devels=true
+
 # Space separated list of packages for which sources will be kept
 # regardless of discard_sources.
 keep_source_packages=''
