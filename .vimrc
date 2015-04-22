@@ -14,6 +14,7 @@ Plugin 'tomasr/molokai'
 Plugin 'tpope/vim-surround'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'tpope/vim-fugitive'
+Plugin 'PotatoesMaster/i3-vim-syntax'
 
 call vundle#end()
 
@@ -32,6 +33,7 @@ set mouse=a
 set t_Co=256
 set timeoutlen=50
 set laststatus=2
+set colorcolumn=+3
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
