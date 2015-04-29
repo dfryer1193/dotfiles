@@ -25,3 +25,7 @@ makelink .config/aurgetrc
 makelink .config/compton.conf
 makelink .vim/autoload/airline/themes/murmur_modified.vim
 
+for file in .bin/*; do
+  makelink $file
+done
+
