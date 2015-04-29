@@ -21,9 +21,11 @@ makelink() {
 
 makelink .bashrc
 makelink .vimrc
-makelink .config/aurgetrc
-makelink .config/compton.conf
 makelink .vim/autoload/airline/themes/murmur_modified.vim
+
+for file in .config/*; do
+  makelink $file
+done
 
 for file in .bin/*; do
   makelink $file
