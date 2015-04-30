@@ -1,19 +1,23 @@
 #!/bin/bash
-level=$(cat /sys/class/power_supply/BAT0/capacity)
-ac=$(cat /sys/class/power_supply/AC/online)
-
-outstr=""
-
-if [[ $ac == "1" ]]; then
-  outstr="${outstr}AC+:"
-else
-  outstr="${outstr}BAT:"
+if [[ -e "/sys/class/power_supply/BAT0/capacity" ]]; then
+  level=$(cat /sys/class/power_supply/BAT0/capacity)
+  ac=$(cat /sys/class/power_supply/AC/online)
 fi
 
-if [[ $level < "15" && $level != "100" ]]; then
-  notify-send 'Low Battery' 'Your battery is below 15%.'
+if [[ $level != "" ]]; then
+  outstr=""
+  
+  if [[ $ac == "1" ]]; then
+    outstr="${outstr}AC+:"
+  else
+    outstr="${outstr}BAT:"
+  fi
+  
+  if [[ $level < "15" && $level != "100" ]]; then
+    notify-send 'Low Battery' 'Your battery is below 15%.'
+  fi
+   
+  outstr="${outstr}${level}%"
+  
+  echo $outstr
 fi
- 
-outstr="${outstr}${level}%"
-
-echo $outstr
