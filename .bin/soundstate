@@ -1,0 +1,18 @@
+#!/bin/bash
+
+outstr=""
+volout=($(amixer get Master | grep %))
+
+if [[ ${volout[5]} == "[on]" ]]; then
+  outstr="${outstr} "
+else
+  outstr="${outstr} "
+fi
+
+volout=${volout[4]}
+volout=${volout#[}
+volout=${volout%]}
+
+outstr=${outstr}${volout}
+
+echo ${outstr}
