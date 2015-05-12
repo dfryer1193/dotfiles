@@ -4,6 +4,14 @@
 # Modified by Aaron Griffin
 # and further by Kazuo Teramoto
 
+usage() {
+  echo "colortheme:"
+  echo "    -b: boxes"
+  echo "    -i: invaders"
+  echo "    -p pacman"
+  echo "    -h this"
+}
+
 initializeANSI()
 {
  esc="$(echo -en '\e')"
@@ -125,6 +133,9 @@ case $1 in
     boxes
     invaders
     pac
+    ;;
+  -h)
+    usage
     ;;
   *)
     boxes
