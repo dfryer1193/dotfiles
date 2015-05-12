@@ -1,0 +1,10 @@
+#!/bin/bash
+
+track=$(mpc -f "[[%artist% - ]%title%]|[%file%]" current)
+misc=($(mpc))
+
+if [[ "${misc[2]}" == "[playing]" ]]; then
+  echo  ${track} - ${misc[4]}
+elif [[ "${misc[2]}" == "[paused]" ]]; then
+  echo  ${track} - ${misc[4]}
+fi
