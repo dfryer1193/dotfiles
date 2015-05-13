@@ -1,12 +1,38 @@
 #!/bin/bash
 
-track=$(mpc -f "[[%artist% - ]%title%]|[%file%]" current)
-mpcstat=$(mpc)
-status=$(echo $mpcstat | grep -oE "(\[p)(laying|aused)\]*")
-time=$(echo $mpcstat | grep -oE "([0-9]+)\:([0-9]+)/([0-9]+)\:([0-9]+)")
+spotify_info(){
+  sp_track=$(mpc -p 6601 -f "[[%artist% - ]%title%]|[%file%]" current)
+  sp_mpcstat=$(mpc -p 6601)
+  sp_status=$(echo $sp_mpcstat | grep -oE "(\[p)(laying|aused)\]*")
+  sp_tracktime=$(echo $sp_mpcstat | grep -oE "([0-9]+)\:([0-9]+)/([0-9]+)\:([0-9]+)")
+}
 
-if [[ "${status}" == "[playing]" ]]; then
-  echo  ${track} - ${time}
-elif [[ "${status}" == "[paused]" ]]; then
-  echo  ${track} - ${time}
+mpd_info(){
+  mpd_track=$(mpc -f "[[%artist% - ]%title%]|[%file%]" current)
+  mpd_mpcstat=$(mpc)
+  mpd_status=$(echo $mpd_mpcstat | grep -oE "(\[p)(laying|aused)\]*")
+  mpd_tracktime=$(echo $mpd_mpcstat | grep -oE "([0-9]+)\:([0-9]+)/([0-9]+)\:([0-9]+)")
+}
+
+mpd_info
+spotify_info
+
+if [[ "${mpd_status}" == "[playing]" ]]; then
+  playstatus=$mpd_status
+  track=$mpd_track
+  tracktime=$mpd_tracktime
+elif [[ "${sp_status}" == "[playing]" || -z "${mpd_status}" ]]; then
+  playstatus=$sp_status
+  track=$sp_track
+  tracktime=$sp_tracktime
+else # prefer local
+  playstatus=$mpd_status
+  track=$mpd_track
+  tracktime=$mpd_tracktime
+fi
+
+if [[ "${playstatus}" == "[playing]" ]]; then
+  echo  ${track} - ${tracktime}
+elif [[ "${playstatus}" == "[paused]" ]]; then
+  echo  ${track} - ${tracktime}
 fi
