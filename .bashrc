@@ -21,6 +21,7 @@ alias update='upgrade'
 alias tree='tree -C'
 alias noblank='xset s off -dpms; xset s noblank'
 alias sudo='sudo '
+alias spclient='ncmpcpp -p 6601'
 
 export TERM=rxvt
 export HISTSIZE=10000
