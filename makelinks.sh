@@ -36,3 +36,7 @@ done
 for file in .i3/*; do
   makelink $file
 done
+
+for file in .ncmpcpp/*; do
+  makelink $file
+done
