@@ -21,6 +21,8 @@ makelink() {
 
 makelink .bashrc
 makelink .vimrc
+makelink .i3blocks.conf
+makelink .i3status.conf
 makelink .vim/autoload/airline/themes/murmur_modified.vim
 
 for file in .config/*; do
@@ -31,3 +33,6 @@ for file in .bin/*; do
   makelink $file
 done
 
+for file in .i3/*; do
+  makelink $file
+done
