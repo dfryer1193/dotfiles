@@ -137,6 +137,10 @@ set_prompt(){
   fi
   PS1=$PS1"$btmLCorner$btmDash($bold$color$last_cmd_stat$textcolor)\#\$>$reset "
 }
+
+if [[ ! $(type wego &> /dev/null) ]]; then
+  wego 1
+fi
 PROMPT_COMMAND='set_prompt'
 
 #PS1='[\u@\h \W]\$ '
