@@ -40,3 +40,7 @@ done
 for file in .ncmpcpp/*; do
   makelink $file
 done
+
+for file in .todo.actions.d/*; do
+  makelink $file
+done
