@@ -44,5 +44,3 @@ done
 for file in .todo.actions.d/*; do
   makelink $file
 done
-
-source ~/.bashrc
