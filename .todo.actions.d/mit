@@ -1,0 +1,404 @@
+#!/bin/bash
+#
+# MIT
+#
+# Bash script to add funcitonality to todo.txt cli by Gina Trapani. Most
+# Important Tasks (MIT) are intended to be specific todo items associated
+# with a specific day. They differ from events in that they do not necessarily
+# have a specified time. As a best practice only 3 MITs should be scheduled
+# per day. This script is intended to parse the todo.txt file and generate a
+# schedule of MITs by day of the week if no arguments are given, or add new
+# MITs to the list.
+#
+# MITs are stored in the following format:
+#   {YYYY.MM.DD} mit task information
+#
+# Author(s): Cody Buell
+#
+# Licensing: GPL, http://www.gnu.org/copyleft/gpl.html
+#
+# Revisions: 2012.06.27 Framework roughed out.
+#            2012.06.28 Initial version completed.
+#            2012.06.29 Moved away from using DOY to prevent problems in
+#                       spanning years.
+#            2012.07.01 Added ability to move MITs.
+#            2012.07.02 Made greps a bit more robust.
+#            2012.07.13 Added ability to invert context listings.
+#            2012.09.22 Modified greps and seds to handle MITs with priorities.
+#            2012.10.29 Merged corrections from 00Davo regarding #2.
+#            2012.10.31 Added BSD vs GNU date detection.
+#            2013.01.16 Merged enhancements from rcraggs, adding ability to move
+#                       non-mit tasks into a mit and vise versa.  Incremented
+#                       version number from 1.1 to 1.2.  Setup core functions,
+#                       added short options section and re-arranged accordingly.
+#            2013.03.10 Added support for dated tasks per Justin Le's request.
+#                       Incremented version number from 1.2 to 1.3.
+#            2015.06.29 Support for GNU Sed 4.2.2.
+#
+# Requisite: todo.sh by Gina Trapanni
+#
+# Resources: https://github.com/ginatrapani/todo.txt-cli/wiki
+#
+# Task List: - Add extra check on mit mv to see that it is an MIT being moved.
+#            - Add ability to add a time {YYYY.MM.DD HH:MMam/pm}
+#                t mit today@10pm go to work @nasa
+#            - Fix mv function so that when a task is converted to a mit, the
+#                whole task name is displayed in the results.  Currently it
+#                snips out the first word.
+
+###################
+# Usage Functions #
+###################
+
+usage() {
+  cat <<-ENDOFUSAGE
+
+	  Most Important Tasks (MIT):
+	    Displays from or adds Most Important Tasks (MIT) to todo.txt file.
+
+	    $(basename $0) [-h|--help] [-v|--version] [date|day task] [rm ID]
+	        [not @context|@context] [mv ID DATE|DAY]
+
+	    -h, --help      Displays help message.
+	    -v, --version   Displays version information.
+
+	    mit DATE|DAY task
+	      DATE must be in the format of YYYY.MM.DD.
+	      DAY can be full or short day names, today or tomorrow.
+
+	    mit rm ID
+	      Convert the MIT identified by ID to a standard task.
+
+	    mit not @context|@context
+	      Displays all MIT's not in or in specified context.
+
+	    mit mv ID DATE|DAY
+	      Move the MIT identified by ID to a new day.
+	      DATE must be in the format of YYYY.MM.DD.
+	      DAY can be full or short day names, today or tomorrow.
+
+	    mit wed upload code to github
+	      Creates a new MIT for next Wednesday unless the current day
+	      is Wednesday in which case it will be created for today.
+
+	ENDOFUSAGE
+  exit
+}
+
+error() {
+  echo "error: $1"
+  echo "usage: $(basename $0) [-hv] [date|day task] [not @context|@context] [mv ID DATE|DAY]"
+}
+
+version() {
+  echo "mit version $VERSION"
+}
+
+####################
+# Helper Funcitons #
+####################
+
+makeDOW() {
+  # format YYYY.MM.DD to day of week (Monday)
+  if [ $DVER = "BSD" ]; then
+    eval $1=`date -j -f "%Y.%m.%d" $2 +%A`
+  else
+    local DAY=`echo $2 | sed 's/\./\//g'`
+    eval $1=`date -d $DAY +%A`
+  fi
+}
+
+makeDATE() {
+  # format YYYY.MM.DD to Day, Month DD
+  if [ $DVER = "BSD" ]; then
+    eval $1=`date -j -f "%Y.%m.%d" $2 "+%A', '%B' '%d"`
+  else
+    local DAY=`echo $2 | sed 's/\./\//g'`
+    eval $1=`date -d $DAY "+%A', '%B' '%d"`
+  fi
+}
+
+parseDAY() {
+  # create YYYY.MM.DD from upcoming day of week
+  if [ $DVER = "BSD" ]; then
+    MITDATE=`date -v +$1 +%Y.%m.%d`
+  else
+	  local dayid=$1
+	  if [ $dayid = "1d" ]; then
+		  dayid="1day"
+	  fi
+    MITDATE=`date -d +$dayid +%Y.%m.%d`
+  fi
+}
+
+getMITS() {
+  # print out mits matching specific date criteria
+  for (( i=0; i < ${#MITS[@]}; i++ )); do
+    MITDATE=`echo ${MITS[$i]} | awk '{print $1}' | sed 's/\.//g'`
+    MITTASK=`echo ${MITS[$i]} | awk '{$1 = ""; print}'`
+    if [ "$MITDATE" $1 "$2" ]; then
+      echo " $MITTASK"
+    fi
+  done
+}
+
+##################
+# Core Functions #
+##################
+
+moveMIT() {
+  # check that second argument is an id and a valid one
+  if [[ $1 =~ ^[0-9]+$ ]]; then
+    MITTASK=`awk -v ID=$1 'NR==ID {$1=""; sub(/^ /, ""); print "\x27"$0"\x27"}' $TODO_FILE`
+
+    TASK=`awk -v ID=$1 'NR==ID {print "\x27"$0"\x27"}' $TODO_FILE`
+    # Add a date to this item if there is none so that we can move it.
+    if [[ ! $TASK =~ \{[0-9]{4}\.[0-9]{2}\.[0-9]{2}\} ]]; then
+      TODAY="`date +%Y.%m.%d`"
+      FIRST_PART=`awk '{print $1"\x27"}' <<< $TASK`
+      SECOND_PART=`awk '{print "\x27"$2"\x27"}' <<< $TASK`
+      if [[ $FIRST_PART =~ ([A-Z]) ]]; then
+        if [[ $SECOND_PART =~ [0-9]{4}-[0-9]{2}-[0-9]{2} ]]; then
+          $SEDI "$1 s/\(^([A-Z]\{1\}) [0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} \)\(.*$\)/\1{$TODAY} \2/" $TODO_FILE
+        else
+          $SEDI "$1 s/\(^([A-Z]\{1\}) \)\(.*$\)/\1{$TODAY} \2/" $TODO_FILE
+        fi
+      elif [[ $FIRST_PART =~ [0-9]{4}-[0-9]{2}-[0-9]{2} ]]; then
+        $SEDI "$1 s/\(^[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} \)\(.*$\)/\1{$TODAY} \2/" $TODO_FILE
+      else
+        $SEDI "$1 s/^/{$TODAY} /" $TODO_FILE
+      fi
+    fi
+
+    case $2 in
+      today )
+        MITDATE="`date +%Y.%m.%d`"
+        $SEDI "$1 s/{[0-9]\{4\}\.[0-9]\{2\}\.[0-9]\{2\}}/{$MITDATE}/" $TODO_FILE
+        echo "TODO: MIT $MITTASK moved to today."
+        exit
+        ;;  
+      tomorrow )
+        parseDAY 1d
+        $SEDI "$1 s/{[0-9]\{4\}\.[0-9]\{2\}\.[0-9]\{2\}}/{$MITDATE}/" $TODO_FILE
+        echo "TODO: MIT $MITTASK moved to tomorrow."
+        exit
+        ;;  
+      monday|mon|tuesday|tue|wednesday|wed|thursday|thu|friday|fri|saturday|sat|sunday|sun )
+        parseDAY $2
+        makeDOW DOW $MITDATE
+        $SEDI "$1 s/{[0-9]\{4\}\.[0-9]\{2\}\.[0-9]\{2\}}/{$MITDATE}/" $TODO_FILE
+        echo "TODO: MIT $MITTASK moved to $DOW."
+        exit
+        ;;  
+      [0-9][0-9][0-9][0-9].[0-9][0-9].[0-9][0-9] )
+        makeDATE DATE $2
+        $SEDI "$1 s/{[0-9]\{4\}\.[0-9]\{2\}\.[0-9]\{2\}}/{$2}/" $TODO_FILE
+        echo "TODO: MIT $MITTASK moved to $DATE."
+        exit
+        ;;  
+      * ) 
+        error "invalid date"
+        exit
+        ;;  
+    esac
+  else
+    error "invalid task id"
+    exit
+  fi
+}
+
+removeMIT() {
+  $SEDI "$1 s/{[0-9]\{4\}\.[0-9]\{2\}\.[0-9]\{2\}}[ ]*//" $TODO_FILE
+  echo "Removed MIT from task $1"
+}
+
+#######################
+# Establish Variables #
+#######################
+
+if date -v 1d > /dev/null 2>&1; then    # detect date version in use
+  DVER="BSD"                            # set as bsd date
+else                                    # if it isn't bsd then...
+  DVER="GNU"                            # set as gnu date
+fi
+
+if sed --version > /dev/null 2>&1; then # detect sed version in use
+  SEDI="sed -i "                        # set as gnu sed syntax
+else                                    # if it isn't gnu then...
+  SEDI="sed -i '' "                     # set as bsd sed syntax
+fi
+
+VERSION="1.4"                           # mit version number
+ACTION=$1                               # set first argument to action
+
+shift                                   # shift arguments
+
+################
+# Long Options #
+################
+
+# display usage
+[ "$ACTION" = "usage" ] || [ x"$1" = x"--help" ] && {
+  usage
+  exit
+}
+
+# display version
+[ x"$1" = x"--version" ] && {
+  version
+  exit
+}
+
+# move mit
+[ x"$1" = x"mv" ] && {
+  moveMIT $2 $3
+}
+
+# remove mit
+[ x"$1" = x"rm" ] && {
+  removeMIT $2
+  exit
+}
+
+#################
+# Short Options #
+#################
+
+while getopts ":hv" Option; do
+  case $Option in
+    h ) 
+      usage
+      exit
+      ;;  
+    v ) 
+      version
+      exit
+      ;;  
+    : ) 
+      echo "Option -$OPTARG requires an argument." >&2
+      exit
+      ;;
+  esac
+done
+
+##########
+# Run It #
+##########
+
+# DISPLAY MITS
+
+[ -z $1 ] || [[ $1 =~ @.* ]] || [ "$1" = "not" ] && {
+
+  # define array element separator as newlines
+  OLDIFS=$IFS
+  IFS=$'\n'
+
+  # invert search if not is specified before context
+  if [ "$1" = "not" ]; then
+    shift
+    FLAG="-v"
+  else
+    FLAG=""
+  fi
+
+  # pull out MITs from the todo file, clean and sort
+  # grepping for "X {YYYY.MM.DD}", "{YYYY.MM.DD}", "X YYYY-MM-DD {YYYY.MM.DD}" or "YYYY-MM-DD {YYYY.MM.DD}"
+  NUM='[0-9].* '
+  PRI='([A-Z]\{1\}) '
+  ADD='[0-9]\{4\}-[0-9]\{2\}-[0-9]\{2\} '
+  MDD='{[0-9]\{4\}\.[0-9]\{2\}\.[0-9]\{2\}}'
+  # creat an array with values like YYYY.MM.DD [priority] [task info] [task number]
+  MITS=(`grep -n "^$PRI$MDD\|^$MDD\|^$PRI$ADD$MDD\|^$ADD$MDD" $TODO_FILE | grep $FLAG "$1" | sed "s/:/ /;s/\(^$NUM\)\($PRI\)\($ADD\)\(.*$\)/\1\2\4/;s/\(^$NUM\)\($ADD\)\(.*$\)/\1\3/;s/\(^$NUM\)\($PRI\)\($MDD \)\(.*\)/\1\3\2\4/;s/{//;s/}//" | awk '{s=$1;e=$NF;$1="";$NF=e" ("s")"}1' | sort`)
+
+  # return array element separator to spaces
+  IFS=$OLDIFS
+
+  # make an array of ordered unique MIT dates
+  DATES=(`grep "^$PRI$MDD\|^$MDD\|^$PRI$ADD$MDD\|^$ADD$MDD" $TODO_FILE | grep $FLAG "$1" | sed 's/^.*{\([0-9]\{4\}\.[0-9]\{2\}\.[0-9]\{2\}\).*$/\1/' | sort | uniq`)
+  #DATES=(`grep "^$PRI$MDD\|^$MDD\|^$PRI$ADD$MDD\|^$ADD$MDD" $TODO_FILE | grep $FLAG "$1" | sed -e 's/{//' -e 's/}//' -e 's/([A-Z]\{1\})//' | awk '{print $1}' | sort | uniq`)
+  TODAY=`date +%Y%m%d`
+
+  # processing if there are no mits
+  if [ "${#DATES[@]}" -eq "0" ]; then
+    echo "No MITs found."
+    exit
+  fi
+
+  # processing of past due mits
+  PASTDUE="false"
+  for day in ${DATES[@]}; do
+    DAY=`echo $day | sed 's/\.//g'`
+    if [ "$DAY" -lt "$TODAY" ]; then
+      PASTDUE="true"
+    fi
+  done
+  if [ "$PASTDUE" = "true" ]; then
+    echo "Past Due:"
+    getMITS -lt $TODAY
+    echo ""
+  fi
+
+  # processing of all other mits
+  for day in ${DATES[@]}; do
+
+    DAY=`echo $day | sed 's/\.//g'`
+    DAYSTO=$(( $DAY - $TODAY ))
+
+    if [ "$DAY" -eq "$TODAY" ]; then
+      echo "Today:"
+      getMITS -eq $DAY
+      echo ""
+
+    elif [ "$DAYSTO" -gt "0" ] && [ "$DAYSTO" -lt "7" ]; then
+      makeDOW DOW $day
+      echo "$DOW:"
+      getMITS -eq $DAY
+      echo ""
+
+    elif [ "$DAYSTO" -ge "7" ]; then
+      makeDATE DATE $day
+      echo "$DATE:"
+      getMITS -eq $DAY
+      echo ""
+    fi
+
+  done
+  exit
+
+}
+
+# ADD NEW MITS
+
+[ -n "$1" ] && {
+
+  MITDATE=`echo $1 | tr [A-Z] [a-z]`
+  shift
+  MITTASK=$@
+  TODAY=`date +%u`
+
+  case $MITDATE in
+    today )
+      NEWMIT="{`date +%Y.%m.%d`} $MITTASK"
+      ;;
+    tomorrow )
+      parseDAY 1d
+      NEWMIT="{$MITDATE} $MITTASK"
+      ;;
+    monday|mon|tuesday|tue|wednesday|wed|thursday|thu|friday|fri|saturday|sat|sunday|sun )
+      parseDAY $MITDATE
+      NEWMIT="{$MITDATE} $MITTASK"
+      ;;
+    [0-9][0-9][0-9][0-9].[0-9][0-9].[0-9][0-9] )
+      NEWMIT="{$MITDATE} $MITTASK"
+      ;;
+    * )
+      error "invalid date"
+      exit
+      ;;
+  esac
+
+  $TODO_FULL_SH add $NEWMIT
+
+  exit
+
+}
