@@ -143,6 +143,11 @@ set_prompt(){
 if [[ ! $(type wego &> /dev/null) ]]; then
   wego 1
 fi
+
+if [[ ! $(type todo.sh &> /dev/null) ]]; then
+  todo.sh ls
+fi
+
 PROMPT_COMMAND='set_prompt'
 
 #PS1='[\u@\h \W]\$ '
