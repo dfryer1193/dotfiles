@@ -21,6 +21,7 @@ makelink() {
 
 makelink .bashrc
 makelink .vimrc
+makelink .Xdefaults
 makelink .i3blocks.conf
 makelink .i3status.conf
 makelink .vim/autoload/airline/themes/murmur_modified.vim
