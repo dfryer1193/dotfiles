@@ -40,12 +40,6 @@ export GIT_PS1_SHOWUNTRACKEDFILES=1
 export GIT_PS1_SHOWCOLORHINTS=1
 export GIT_PS1_SHOWUPSTREAM=auto
 
-#if [[ $? -ne 0 ]]; then
-#	PS1="┌\e[1;31m[\u@\h \$]\e[0m\n├\W\n└─(\e[1;31m✗\e[0m)\$>"
-#else
-#	PS1="┌\e[1;32m[\u@\h \$]\e[0m\n├\W\n└─(\e[1;32m✓\e[0m)\$>"
-#fi
-
 get_sha(){
   git rev-parse --short HEAD 2>/dev/null
 }
@@ -132,7 +126,7 @@ set_prompt(){
   
   gitstring=$(__git_ps1 "(%s $(get_sha))")
   
-  PS1="$(printf "\033k${USER}@${HOSTNAME%%.*}:${PWD}")$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
+  PS1="$(echo -e "\033k;\u@\h:\w\007")$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
   PS1=$PS1"$midLside$reset`if [ -e /sys/class/power_supply/BAT1 ]; then echo $(battery_status);fi;` $textcolor\A \w\n"
   if [[ ! -z ${gitstring// } ]]; then
     PS1=$PS1"$midLside${gitstring}\n"
