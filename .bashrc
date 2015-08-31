@@ -136,18 +136,18 @@ set_prompt(){
   PS1=$PS1"$btmLCorner$btmDash($bold$color$last_cmd_stat$textcolor)\#\$>$reset "
 }
 
+# tmux stuff
+if which tmux >/dev/null 2>&1; then
+  # if not in tmux session, and no session exists, start a new session
+  test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
+
 if [[ ! $(type wego &> /dev/null) ]]; then
   wego 1
 fi
 
 if [[ ! $(type todo.sh &> /dev/null) ]]; then
   todo.sh ls
-fi
-
-# tmux stuff
-if which tmux >/dev/null 2>&1; then
-  # if not in tmux session, and no session exists, start a new session
-  test -z "$TMUX" && (tmux attach || tmux new-session)
 fi
 
 PROMPT_COMMAND='set_prompt'
