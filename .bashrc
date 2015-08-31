@@ -148,6 +148,12 @@ if [[ ! $(type todo.sh &> /dev/null) ]]; then
   todo.sh ls
 fi
 
+# tmux stuff
+if which tmux >/dev/null 2>&1; then
+  # if not in tmux session, and no session exists, start a new session
+  test -z "$TMUX" && (tmux attach || tmux new-session)
+fi
+
 PROMPT_COMMAND='set_prompt'
 
 #PS1='[\u@\h \W]\$ '
