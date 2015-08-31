@@ -131,8 +131,8 @@ set_prompt(){
   fi
   
   gitstring=$(__git_ps1 "(%s $(get_sha))")
-
-  PS1="$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
+  
+  PS1="$(printf "\033k${USER}@${HOSTNAME%%.*}:${PWD}")$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
   PS1=$PS1"$midLside$reset`if [ -e /sys/class/power_supply/BAT1 ]; then echo $(battery_status);fi;` $textcolor\A \w\n"
   if [[ ! -z ${gitstring// } ]]; then
     PS1=$PS1"$midLside${gitstring}\n"
