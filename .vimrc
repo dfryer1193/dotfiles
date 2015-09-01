@@ -3,6 +3,10 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
+Plugin 'Align'
+Plugin 'cecutil'
+Plugin 'vis'
+
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
@@ -17,6 +21,7 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'tpope/vim-endwise'
 Plugin 'rstacruz/vim-closer'
+Plugin 'atweiden/vim-dragvisuals'
 
 call vundle#end()
 
@@ -35,10 +40,12 @@ set mouse=a
 set t_Co=256
 set timeoutlen=50
 set laststatus=2
-set colorcolumn=+3
+set colorcolumn=80
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+set splitbelow " new h splits go below
+set splitright " new v splits go right
 
 filetype plugin on
 syntax on
@@ -57,6 +64,7 @@ nnoremap <C-Right> <C-w>l
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
 
+command! Fuck execute 'w !sudo tee % > /dev/null'
 command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist
 command! -nargs=* TNT NERDTreeTabsToggle
 
@@ -132,8 +140,25 @@ endif
 " https://github.com/c9s/perlomni.vim
 let g:neocomplete#sources#omni#input_patterns.perl='\h\w*->\h\w*\|\h\w*::'
 
+" Highlight merge conflict markers
+match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
+
+" Jump to next/previous merge conflict marker
+nnoremap <silent> ]c /\v^(\<\|\=\|\>){7}([^=].+)?$<CR>
+nnoremap <silent> [c ?\v^(\<\|\=\|\>){7}([^=].+)\?$<CR>
+
 highlight Search ctermbg=000
+
+" Remove any introduced trailing whitespace after moving...
+let g:DVB_TrimWS = 1
+
+vmap  <expr> <C-Left> DVB_Drag('left')
+vmap  <expr> <C-Right> DVB_Drag('right')
+vmap  <expr> <C-Down> DVB_Drag('down')
+vmap  <expr> <C-Up> DVB_Drag('up')
 
 if has("autocmd")
   autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+  autocmd VimResized * :wincmd =
+  autocmd! bufwritepost .vimrc source .vimrc
 endif
