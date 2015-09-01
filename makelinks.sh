@@ -1,8 +1,12 @@
 #!/bin/bash
 
-create_msg() { echo "[ CREATE ] $@"; }
+boldYellow='\e[1;33m'
+boldGrn='\e[1;32m'
+reset='\e[0m'
 
-exists_msg() { echo "[ EXISTS ] $@"; }
+create_msg() { echo -e "[ ${boldGrn}CREATE${reset} ] $@"; }
+
+exists_msg() { echo -e "[ ${boldYellow}EXISTS${reset} ] $@"; }
 
 makelink() {
   lname=$1
@@ -19,6 +23,7 @@ makelink() {
   fi
 }
 
+makelink TMP
 makelink .bashrc
 makelink .vimrc
 makelink .Xdefaults
