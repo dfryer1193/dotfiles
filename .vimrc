@@ -69,6 +69,7 @@ command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist
 command! -nargs=* TNT NERDTreeTabsToggle
 
 let g:nerdtree_tabs_open_on_console_startup=1
+let NERDTreeDirArrows=0
 
 let g:molokai_original=1
 
