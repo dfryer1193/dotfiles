@@ -126,7 +126,7 @@ set_prompt(){
   
   gitstring=$(__git_ps1 "(%s $(get_sha))")
 
-  PS1="$(echo -ne '\033]2;\u@\h:\w\237')"
+  PS1="$(echo -ne '\033]2;\u@\h:\w\007')"
   #PS1=""
   PS1=$PS1"$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
   PS1=$PS1"$midLside$reset`if [ -e /sys/class/power_supply/BAT1 ]; then echo $(battery_status);fi;` $textcolor\A \w\n"
