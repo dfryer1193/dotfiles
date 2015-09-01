@@ -15,6 +15,8 @@ Plugin 'tpope/vim-surround'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'PotatoesMaster/i3-vim-syntax'
+Plugin 'tpope/vim-endwise'
+Plugin 'rstacruz/vim-closer'
 
 call vundle#end()
 
