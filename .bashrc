@@ -31,6 +31,57 @@ export EDITOR=vim visudo
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
 
+# For git+ssh
+env=~/.ssh/agent.env
+
+agent_is_running() {
+  if [ "$SSH_AUTH_SOCK" ]; then
+    # ssh-add returns:
+    #   0 = agent running, has keys
+    #   1 = agent running, no keys
+    #   2 = agent not running
+    ssh-add -l >/dev/null 2>&1 || [ $? -eq 1 ]
+  else
+    false
+  fi
+}
+
+agent_has_keys() {
+  ssh-add -l >/dev/null 2>&1
+}
+
+agent_load_env() {
+  . "$env" >/dev/null
+}
+
+agent_start() {
+  (umask 077; ssh-agent >"$env")
+  . "$env" >/dev/null
+}
+
+ssh_add() {
+  if [[ -e $1 ]]; then
+    ssh-add $1
+  fi
+}
+
+if ! agent_is_running; then
+  agent_load_env
+fi
+
+if ! agent_is_running; then
+  agent_start
+  ssh-add
+  #try adding github key
+  ssh_add ~/.ssh/github_id_rsa
+elif ! agent_has_keys; then
+  ssh-add
+  #try adding github key
+  ssh_add ~/.ssh/github_id_rsa
+fi
+
+unset env
+
 # make git PS1 available
 source /usr/share/git/git-prompt.sh
 # allow git-prompt.sh to show git statuses
