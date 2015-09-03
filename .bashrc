@@ -25,11 +25,21 @@ alias spclient='ncmpcpp -p 6601'
 alias todo='todo.sh'
 alias t='todo.sh'
 
-export TERM=rxvt
 export HISTSIZE=10000
 export EDITOR=vim visudo
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
+
+function aa_256 ()  {
+  local o= i= x=`tput op` cols=`tput cols` y= oo= yy=;
+  y=`printf %$(($cols-6))s`;
+  yy=${y// /=};
+  for i in {0..256}; do
+    o=00${i};
+    oo=`echo -en "setaf ${i}\nsetab ${i}\n"|tput -S`;
+    echo -e "${o:${#o}-3:3} ${oo}${yy}${x}";
+  done;
+}
 
 # For git+ssh
 env=~/.ssh/agent.env
