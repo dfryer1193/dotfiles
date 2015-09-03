@@ -22,6 +22,7 @@ Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'tpope/vim-endwise'
 Plugin 'rstacruz/vim-closer'
 Plugin 'atweiden/vim-dragvisuals'
+Plugin 'keith/tmux.vim'
 
 call vundle#end()
 
