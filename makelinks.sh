@@ -23,7 +23,8 @@ makelink() {
   fi
 }
 
-makelink TMP
+makelink .gitignore
+git config --global core.excludesfile ~/.gitignore
 makelink .bashrc
 makelink .vimrc
 makelink .Xdefaults
