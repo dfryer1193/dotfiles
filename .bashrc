@@ -71,7 +71,7 @@ agent_start() {
 
 ssh_add() {
   if [[ -e $1 ]]; then
-    ssh-add $1
+    ssh-add $1 >/dev/null
   fi
 }
 
