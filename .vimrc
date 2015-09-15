@@ -23,6 +23,8 @@ Plugin 'tpope/vim-endwise'
 Plugin 'rstacruz/vim-closer'
 Plugin 'atweiden/vim-dragvisuals'
 Plugin 'keith/tmux.vim'
+Plugin 'xolox/vim-misc'
+Plugin 'xolox/vim-notes'
 
 call vundle#end()
 
@@ -68,6 +70,11 @@ nnoremap <C-Down> <C-w>j
 command! Fuck execute 'w !sudo tee % > /dev/null'
 command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist
 command! -nargs=* TNT NERDTreeTabsToggle
+
+" vim-notes options
+let g:notes_directories=['~/AeroFS/School/MCC/']
+let g:notes_suffix='.txt'
+let g:notes_unicode_enabled=0
 
 let g:nerdtree_tabs_open_on_console_startup=1
 let NERDTreeDirArrows=0
