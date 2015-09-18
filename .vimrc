@@ -43,7 +43,7 @@ set mouse=a
 set t_Co=256
 set timeoutlen=50
 set laststatus=2
-set colorcolumn=80
+set colorcolumn=81
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
@@ -68,7 +68,7 @@ nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
 
 command! Fuck execute 'w !sudo tee % > /dev/null'
-command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist
+command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist fo-=c
 command! -nargs=* TNT NERDTreeTabsToggle
 
 " vim-notes options
