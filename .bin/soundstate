@@ -1,17 +1,13 @@
 #!/bin/bash
 
 outstr=""
-volout=($(amixer get Master | grep %))
+volout=$(/usr/lib/i3blocks/volume)
 
-if [[ ${volout[5]} == "[on]" ]]; then
+if [[ "${volout}" != "MUTE" ]]; then
   outstr="${outstr} "
 else
   outstr="${outstr} "
 fi
-
-volout=${volout[4]}
-volout=${volout#[}
-volout=${volout%]}
 
 outstr=${outstr}${volout}
 
