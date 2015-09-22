@@ -163,7 +163,7 @@ bindsym $mod+F12 exec amixer set Master 5%+
 bindsym $mod+F11 exec amixer set Master 5%-
 bindsym $mod+F10 exec amixer set Master toggle
 
-bindsym $win+P sticky toggle
+bindsym $mod+Shift+P sticky toggle
 
 bindsym $win+L exec ~/.bin/py3lock.py
 #i3lock -t -i ~/.config/themer/current/wallpaper.png
