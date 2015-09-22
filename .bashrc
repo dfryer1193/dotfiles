@@ -200,7 +200,7 @@ set_prompt(){
 # tmux stuff
 if which tmux >/dev/null 2>&1; then
   # if not in tmux session, and no session exists, start a new session
-  test -z "$TMUX" && (tmux attach || tmux new-session)
+  test -z "$TMUX" && (tmux attach || tmux)
 fi
 
 if [[ ! $(type wego &> /dev/null) ]]; then
