@@ -208,6 +208,7 @@ if [[ ! $(type wego &> /dev/null) ]]; then
 fi
 
 if [[ ! $(type todo.sh &> /dev/null) ]]; then
+  todo.sh pull &>/dev/null
   todo.sh ls
 fi
 
