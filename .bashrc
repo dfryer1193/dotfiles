@@ -204,14 +204,9 @@ if which tmux >/dev/null 2>&1; then
   test -z "$TMUX" && (tmux attach || tmux)
 fi
 
-if [[ ! $(type wego &> /dev/null) ]]; then
-  wego 1
-fi
+type wego &>/dev/null && wego 1
 
-if [[ ! $(type todo.sh &> /dev/null) ]]; then
-  todo.sh pull &>/dev/null
-  todo.sh ls
-fi
+type todo.sh &>/dev/null && (todo.sh pull &>/dev/null; todo.sh ls)
 
 PROMPT_COMMAND='set_prompt'
 
