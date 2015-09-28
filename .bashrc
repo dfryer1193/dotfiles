@@ -24,6 +24,7 @@ alias sudo='sudo '
 alias spclient='ncmpcpp -p 6601'
 alias todo='todo.sh'
 alias t='todo.sh'
+alias vim='type nvim &>/dev/null && (nvim || vim)'
 
 export HISTSIZE=10000
 export EDITOR=vim visudo
