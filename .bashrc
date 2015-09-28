@@ -27,7 +27,11 @@ alias t='todo.sh'
 alias vim='type nvim &>/dev/null && (nvim || vim)'
 
 export HISTSIZE=10000
-export EDITOR=vim visudo
+if [[ ! $(type nvim &>/dev/null) ]]; then
+  export EDITOR=nvim visudo
+else
+  export EDITOR=vim visudo
+fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
 
