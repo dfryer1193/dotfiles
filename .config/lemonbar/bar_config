@@ -1,0 +1,54 @@
+#!/bin/bash
+
+# Inspired by /u/jhallard
+# https://github.com/jhallard/dot-files/blob/master/.config/lemonbar/bar_config
+
+# Lemonbar Config
+
+# fonts
+FONT1="-xos4-terminesspowerline-medium-r-normal--12-120-72-72-c-60-iso10646-1"
+
+# Get screen width
+SW=$(xrandr | grep current| awk '{print $8}')
+
+# Panel
+PWO=30
+PW=$(( $SW - $PWO - $PWO ))
+PH=20
+PO=3
+
+# Workspaces
+WORKSPACES="I II III IV V VI VII VIII IX X"
+
+# Color file
+CD=~/.config/lemonbar/bar_colors
+bold=$(tput bold)
+normal=$(tput sgr0)
+
+# Fetch the Colors
+BG=$(cat ${CD} | grep -i background: | tail -c 8)
+FG=$(cat ${CD} | grep -i foreground: | tail -c 8)
+
+BLACK=$(cat ${CD} | grep -i color0: | tail -c 8)
+BBLACK=$(cat ${CD} | grep -i color8: | tail -c 8)
+
+RED=$(cat ${CD} | grep -i color1: | tail -c 8)
+BRED=$(cat ${CD} | grep -i color9: | tail -c 8)
+
+GREEN=$(cat ${CD} | grep -i color2: | tail -c 8)
+BGREEN=$(cat ${CD} | grep -i color10: | tail -c 8)
+
+YELLOW=$(cat ${CD} | grep -i color3: | tail -c 8)
+BYELLOW=$(cat ${CD} | grep -i color11: | tail -c 8)
+
+BLUE=$(cat ${CD} | grep -i color4: | tail -c 8)
+BBLUE=$(cat ${CD} | grep -i color12: | tail -c 8)
+
+MAGENTA=$(cat ${CD} | grep -i color5: | tail -c 8)
+BMAGENTA=$(cat ${CD} | grep -i color13: | tail -c 8)
+
+CYAN=$(cat ${CD} | grep -i color6: | tail -c 8)
+BCYAN=$(cat ${CD} | grep -i color14: | tail -c 8)
+
+WHITE=$(cat ${CD} | grep -i color7: | tail -c 8)
+BWHITE=$(cat ${CD} | grep -i color15: | tail -c 8)
