@@ -101,6 +101,9 @@ vmap  <expr> <C-Right> DVB_Drag('right')
 vmap  <expr> <C-Down> DVB_Drag('down')
 vmap  <expr> <C-Up> DVB_Drag('up')
 
+" YCM popup color change
+highlight Pmenu ctermfg=7 ctermbg=8 guifg=#ffffff guibg=#000000
+
 if has("autocmd")
   autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
   autocmd VimResized * :wincmd =
