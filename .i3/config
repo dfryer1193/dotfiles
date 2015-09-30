@@ -184,6 +184,6 @@ exec mpd
 exec mopidy
 exec aerofs
 exec pidgin
-exec udiskie
+exec udiskie -s
 
 for_window [class="^.*"] border pixel 0
