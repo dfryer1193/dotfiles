@@ -130,7 +130,6 @@ bar {
     }
 }
 
-
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [instance="float"] floating enable
@@ -172,6 +171,7 @@ bindsym XF86MonBrightnessUp exec xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec xbacklight -dec 5
 
 bindsym $mod+Shift+P sticky toggle
+bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable;
 
 bindsym $win+L exec ~/.bin/py3lock.py
 bindsym $mod+Control+L exec ~/.bin/py3lock.py
