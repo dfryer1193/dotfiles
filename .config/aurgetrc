@@ -13,7 +13,7 @@
 ###
 
 # The directory within which to build.
-build_directory="/tmp"
+build_directory="/tmp/aurget"
 
 # Should aurget remove the extracted source directory after processing?
 discard_sources=true
@@ -56,7 +56,7 @@ sync_mode='install'
 
 # Where aurget will place temporary working files as needed. This
 # directory is created and cleared when aurget starts.
-temp_directory='/tmp/aurget'
+temp_directory='/tmp/aurget/working'
 
 # Colors
 colorR="\e[1;31m"
