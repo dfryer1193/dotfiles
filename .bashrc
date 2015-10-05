@@ -26,7 +26,7 @@ alias todo='todo.sh'
 alias t='todo.sh'
 
 export HISTSIZE=10000
-if [[ ! $(type nvim &>/dev/null) ]]; then
+if $(type nvim &>/dev/null) ; then
   alias vim='nvim'
   export EDITOR=nvim visudo
 else
