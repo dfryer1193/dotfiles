@@ -115,7 +115,7 @@ bar {
     position          top
     workspace_buttons yes
     
-    font pango:Input Mono 12, FontAwesome 12
+    font pango:Meslo LG S DZ 10
  
     colors {
         background $background
