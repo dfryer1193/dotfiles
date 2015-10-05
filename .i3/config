@@ -176,6 +176,7 @@ bindsym $win+L exec ~/.bin/py3lock.py
 bindsym $mod+Control+L exec ~/.bin/py3lock.py
 #i3lock -t -i ~/.config/themer/current/wallpaper.png
 
+exec --no-startup-id exec nm-applet
 exec urxvtd
 exec ~/.screenlayout/default.sh
 exec compton -b
