@@ -24,6 +24,9 @@ Plugin 'keith/tmux.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'vim-pandoc/vim-pandoc'
+Plugin 'vim-pandoc/vim-pandoc-syntax'
+
 
 call vundle#end()
 
@@ -43,11 +46,9 @@ set t_Co=256
 set timeoutlen=50
 set laststatus=2
 set colorcolumn=81
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
 set splitbelow " new h splits go below
 set splitright " new v splits go right
+set foldmethod=syntax
 
 filetype plugin on
 syntax on

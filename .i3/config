@@ -30,7 +30,7 @@ floating_modifier $mod
 
 bindsym $mod+Shift+q kill
 
-bindsym $mod+Return exec urxvtc
+bindsym $mod+Return exec termite
 bindsym $mod+d exec dmenu_run -i -f -l 70 -w 200 -o 0.8 -nb "$background" -nf "$secondary" -sb "$secondary" -sf "$background" -fn "-*-terminesspowerline-*-*-*-*-12-*-*-*-*-*-*-*"
 
 bindsym $mod+j focus left
@@ -115,7 +115,7 @@ bar {
     position          top
     workspace_buttons yes
     
-    font pango:Input Mono 12, FontAwesome 12
+    font pango:Meslo LG S DZ 10
  
     colors {
         background $background
@@ -177,7 +177,7 @@ bindsym $win+L exec ~/.bin/py3lock.py
 bindsym $mod+Control+L exec ~/.bin/py3lock.py
 #i3lock -t -i ~/.config/themer/current/wallpaper.png
 
-exec urxvtd
+exec --no-startup-id exec nm-applet
 exec ~/.screenlayout/default.sh
 exec compton -b
 exec start-pulseaudio-x11

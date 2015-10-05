@@ -88,6 +88,16 @@ while :; do
       echo "\"border_top\":0,"
       echo "\"background\":\"$BLACK\","
       echo "\"full_text\":\" $(date '+%H.%M.%S') \""
+    echo "},"
+    # battery (if present)
+    echo '{'
+      echo "\"name\":\"battery\","
+      echo "\"border\":\"$GREEN\","
+      echo "\"border_left\":0,"
+      echo "\"border_right\":0,"
+      echo "\"border_top\":0,"
+      echo "\"background\":\"$BLACK\","
+      echo "\"full_text\":\" $(~/.bin/batstatus) \""
     echo "}"
   echo "]"
   read -t 1 tmp <&0
