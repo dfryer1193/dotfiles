@@ -83,70 +83,7 @@ fi
 
 unset env
 
-# make git PS1 available
-source /usr/share/git/git-prompt.sh
-# allow git-prompt.sh to show git statuses
-export GIT_PS1_SHOWDIRTYSTATE=1
-export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUNTRACKEDFILES=1
-export GIT_PS1_SHOWCOLORHINTS=1
-export GIT_PS1_SHOWUPSTREAM=auto
-
-get_sha(){
-  git rev-parse --short HEAD 2>/dev/null
-}
-
-battery_status(){
-  BATTERY=/sys/class/power_supply/BAT1
- 
-  CHARGE=`cat $BATTERY/capacity`
-  BATSTATE=`cat $BATTERY/status`
-  # Colors for humans
-  NON='\033[00m'
-  BLD='\033[01m'
-  RED='\033[01;31m'
-  GRN='\033[01;32m'
-  YEL='\033[01;33m'
- 
-  COLOUR="$RED"
- 
-  case "${BATSTATE}" in
-     'Charged')
-     BATSTT="$BLD=$NON"
-     ;;
-     'Charging')
-     BATSTT="$BLD+$NON"
-     ;;
-     'Discharging')
-     BATSTT="$BLD-$NON"
-     ;;
-  esac
- 
-  # prevent a charge of more than 100% displaying
-  if [ "$CHARGE" -gt "99" ]
-  then
-     CHARGE=100
-  fi
- 
-  # prevent an error if the battery is not in the laptop (e.g. you have two and take out the primary)
-  STATE=`cat $BATTERY/present`
-   if [ "$STATE" == '0' ]
-  then
-          echo -e "${RED}nobat"
-  exit
-  fi
- 
-  if [ "$CHARGE" -gt "15" ]
-  then
-     COLOUR="$YEL"
-  fi
- 
-  if [ "$CHARGE" -gt "30" ]
-  then
-     COLOUR="$GRN"
-  fi
-  echo -e "${BATSTT}${COLOUR}${CHARGE}%${NON}"
-}
+# TODO: git stuff in prompt
 
 set_prompt(){
   last_cmd=$?
