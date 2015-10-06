@@ -19,6 +19,8 @@ fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
 
+. ~/.bash_colors
+
 function aa_256 ()  {
   local o= i= x=`tput op` cols=`tput cols` y= oo= yy=;
   y=`printf %$(($cols-6))s`;
