@@ -1,0 +1,3 @@
+#!/bin/bash
+cur_branch=$(git branch | grep \* | grep -oE "[A-Za-z]{1,}")
+
