@@ -26,6 +26,8 @@ makelink() {
 makelink .gitignore
 git config --global core.excludesfile ~/.gitignore
 makelink .bashrc
+makelink .bash_aliases
+makelink .bash_colors
 makelink .vimrc
 makelink .Xdefaults
 makelink .tmux.conf

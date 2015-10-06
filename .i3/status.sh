@@ -88,17 +88,20 @@ while :; do
       echo "\"border_top\":0,"
       echo "\"background\":\"$BLACK\","
       echo "\"full_text\":\" $(date '+%H.%M.%S') \""
-    echo "},"
-    # battery (if present)
-    echo '{'
-      echo "\"name\":\"battery\","
-      echo "\"border\":\"$GREEN\","
-      echo "\"border_left\":0,"
-      echo "\"border_right\":0,"
-      echo "\"border_top\":0,"
-      echo "\"background\":\"$BLACK\","
-      echo "\"full_text\":\" $(~/.bin/batstatus) \""
     echo "}"
+    # battery (if present)
+    battery=$(~/.bin/batstatus)
+    if [[ ! -z ${battery} ]]; then
+      echo ',{'
+        echo "\"name\":\"battery\","
+        echo "\"border\":\"$GREEN\","
+        echo "\"border_left\":0,"
+        echo "\"border_right\":0,"
+        echo "\"border_top\":0,"
+        echo "\"background\":\"$BLACK\","
+        echo "\"full_text\":\" $(~/.bin/batstatus) \""
+      echo "},"
+    fi
   echo "]"
   read -t 1 tmp <&0
   tmp=$(echo ${tmp} | sed 's/^,//')
