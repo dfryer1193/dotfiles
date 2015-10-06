@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# ~/.bash_colors
+#
+
+export RESET_COLOR='\[\e[0m\]'
+
+export BLACK='\[\e[0;30m\]'
+export RED='\[\e[0;31m\]'
+export GREEN='\[\e[0;32m\];'
+export YELLOW='\[\e[0;33m\]'
+export BLUE='\[\e[0;34m\]'
+export MAGENTA='\[\e[0;35m\]'
+export CYAN='\[\e[0;36m\]'
+export WHITE='\[\e[0;37m\]'
+
+export BLACK_BOLD='\[\e[1;30m\]'
+export RED_BOLD='\[\e[1;31m\]'
+export GREEN_BOLD='\[\e[1;32m\]' 
+export YELLOW_BOLD='\[\e[1;33m\]'
+export BLUE_BOLD='\[\e[1;34m\]'
+export MAGENTA_BOLD='\[\e[1;35m\]'
+export CYAN_BOLD='\[\e[1;36m\]'
+export WHITE_BOLD='\[\e[1;37m\]'
