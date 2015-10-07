@@ -1,23 +1,21 @@
 #!/bin/bash
-GIT_STATUS=$(git status -sb)
 
-cur_branch=$(git branch | grep \* | grep -oE "[A-Za-z]{1,}")
+. ~/.bash_colors
 
-commits_ahead=$(echo ${GIT_STATUS} | grep -E "^##" | \
+GIT_STATUS=$(git status -sb 2>/dev/null)
+
+cur_branch=$(git branch 2>/dev/null | grep \* | grep -oE "[A-Za-z]{1,}")
+
+commits_ahead=$(echo "${GIT_STATUS}" | grep -E "^##" | \
   grep -oE "ahead [0-9]{1,}" | awk '{print $2}')
-commits_behind=$(echo ${GIT_STATUS} | grep -E "^##" | \
+commits_behind=$(echo "${GIT_STATUS}" | grep -E "^##" | \
   grep -oE "behind [0-9]{1,}" | awk '{print $2}')
 
-num_added=$(echo ${GIT_STATUS} | grep -E "^A " | wc -l)
-echo $num_added
-num_modified=$(echo ${GIT_STATUS} | grep -E "^ M" | wc -l)
-echo $num_modified
-num_untracked=$(echo ${GIT_STATUS} | grep -E "^??" | wc -l)
-echo $num_untracked
-num_conflict=$(echo ${GIT_STATUS} | grep -E "^AA" | wc -l)
-echo $num_conflict
-num_stashed=$(git stash list | wc -l)
-echo $num_stashed
+num_added=$(echo "${GIT_STATUS}" | grep -E "^A " | wc -l)
+num_modified=$(echo "${GIT_STATUS}" | grep -E "^ M" | wc -l)
+num_untracked=$(echo "${GIT_STATUS}" | grep -E "^\?\?" | wc -l)
+num_conflict=$(echo "${GIT_STATUS}" | grep -E "^AA" | wc -l)
+num_stashed=$(git stash list 2>/dev/null | wc -l)
 
 outstr=""
 outstr=${outstr}${cur_branch}
@@ -26,28 +24,32 @@ local_tracking=""
 
 # branch tracking
 if [[ ! -z "${commits_behind}" ]] && [[ ${commits_behind} -ne 0 ]]; then
-  branch_tracking=${branch_tracking}"${commits_behind}<"
+  branch_tracking=${branch_tracking}"${RED}${commits_behind}<${RESET_COLOR}"
 fi
 
 if [[ ! -z "${commits_ahead}" ]] && [[ ${commits_ahead} -ne 0 ]]; then
-  branch_tracking=${branch_tracking}">${commits_ahead}"
+  branch_tracking=${branch_tracking}"${GREEN}>${commits_ahead}${RESET_COLOR}"
 fi
 
 # local tracking
 if [[ ! -z "${num_added}" ]] && [[ ${num_added} -ne 0 ]]; then
-  local_tracking=${local_tracking}"A${num_added}"
+  local_tracking=${local_tracking}"${RED}A${num_added}${RESET_COLOR}"
 fi
 
 if [[ ! -z "${num_modified}" ]] && [[ ${num_modified} -ne 0 ]]; then
-  local_tracking=${local_tracking}"M${num_modified}"
+  local_tracking=${local_tracking}"${YELLOW}M${num_modified}${RESET_COLOR}"
 fi
 
 if [[ ! -z "${num_untracked}" ]] && [[ ${num_untracked} -ne 0 ]]; then
-  local_tracking=${local_tracking}"?${num_untracked}"
+  local_tracking=${local_tracking}"${BLUE}?${num_untracked}${RESET_COLOR}"
 fi
 
 if [[ ! -z "${num_conflict}" ]] && [[ ${num_conflict} -ne 0 ]]; then
-  local_tracking=${local_tracking}"X${num_conflict}"
+  local_tracking=${local_tracking}"${RED}X${num_conflict}${RESET_COLOR}"
+fi
+
+if [[ ! -z "${num_stashed}" ]] && [[ ${num_stashed} -ne 0 ]]; then
+  local_tracking=${local_tracking}"${YELLOW}S${num_stashed}${RESET_COLOR}"
 fi
 
 outstr=${outstr}${branch_tracking}
