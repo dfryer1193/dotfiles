@@ -100,7 +100,7 @@ while :; do
         echo "\"border_top\":0,"
         echo "\"background\":\"$BLACK\","
         echo "\"full_text\":\" $(~/.bin/batstatus) \""
-      echo "},"
+      echo "}"
     fi
   echo "]"
   read -t 1 tmp <&0
