@@ -121,14 +121,17 @@ set_prompt(){
     PS1=$PS11"$color[$textcolor$numtasks$color]$RESET_COLOR"
   fi
 
-  # git stuff
-  gitstring=$(~/.bin/gitstatus)
-
+  # current dir
   PS1=$PS1"$color[$textcolor\w"
   PS1=$PS1"$color]$RESET_COLOR"
 
-  if [[ ! -z ${gitstring// } ]]; then 
-    PS1=$PS1"$color[$textcolor${gitstring}$color]"
+  # git stuff
+  if [[ -e "./.git" ]]; then
+    $(git remote update &>/dev/null)
+    gitstring=$(~/.bin/gitstatus)
+    if [[ ! -z ${gitstring// } ]]; then
+      PS1=$PS1"$color[$textcolor${gitstring}$color]"
+    fi
   fi
 
   PS1=$PS1"$RESET_COLOR "
