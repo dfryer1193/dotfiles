@@ -1,3 +1,58 @@
 #!/bin/bash
+GIT_STATUS=$(git status -sb)
+
 cur_branch=$(git branch | grep \* | grep -oE "[A-Za-z]{1,}")
 
+commits_ahead=$(echo ${GIT_STATUS} | grep -E "^##" | \
+  grep -oE "ahead [0-9]{1,}" | awk '{print $2}')
+commits_behind=$(echo ${GIT_STATUS} | grep -E "^##" | \
+  grep -oE "behind [0-9]{1,}" | awk '{print $2}')
+
+num_added=$(echo ${GIT_STATUS} | grep -E "^A " | wc -l)
+echo $num_added
+num_modified=$(echo ${GIT_STATUS} | grep -E "^ M" | wc -l)
+echo $num_modified
+num_untracked=$(echo ${GIT_STATUS} | grep -E "^??" | wc -l)
+echo $num_untracked
+num_conflict=$(echo ${GIT_STATUS} | grep -E "^AA" | wc -l)
+echo $num_conflict
+num_stashed=$(git stash list | wc -l)
+echo $num_stashed
+
+outstr=""
+outstr=${outstr}${cur_branch}
+branch_tracking=""
+local_tracking=""
+
+# branch tracking
+if [[ ! -z "${commits_behind}" ]] && [[ ${commits_behind} -ne 0 ]]; then
+  branch_tracking=${branch_tracking}"${commits_behind}<"
+fi
+
+if [[ ! -z "${commits_ahead}" ]] && [[ ${commits_ahead} -ne 0 ]]; then
+  branch_tracking=${branch_tracking}">${commits_ahead}"
+fi
+
+# local tracking
+if [[ ! -z "${num_added}" ]] && [[ ${num_added} -ne 0 ]]; then
+  local_tracking=${local_tracking}"A${num_added}"
+fi
+
+if [[ ! -z "${num_modified}" ]] && [[ ${num_modified} -ne 0 ]]; then
+  local_tracking=${local_tracking}"M${num_modified}"
+fi
+
+if [[ ! -z "${num_untracked}" ]] && [[ ${num_untracked} -ne 0 ]]; then
+  local_tracking=${local_tracking}"?${num_untracked}"
+fi
+
+if [[ ! -z "${num_conflict}" ]] && [[ ${num_conflict} -ne 0 ]]; then
+  local_tracking=${local_tracking}"X${num_conflict}"
+fi
+
+outstr=${outstr}${branch_tracking}
+if [[ ! -z "${local_tracking}" ]]; then
+  outstr=${outstr}"|${local_tracking}"
+fi
+
+echo -e $outstr
