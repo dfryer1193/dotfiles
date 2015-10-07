@@ -83,8 +83,6 @@ fi
 
 unset env
 
-# TODO: git stuff in prompt
-
 set_prompt(){
   last_cmd=$?
 	
@@ -123,12 +121,17 @@ set_prompt(){
     PS1=$PS11"$color[$textcolor$numtasks$color]$RESET_COLOR"
   fi
 
-  PS1=$PS1"$color[$textcolor\w"
-  if [[ ! -z ${gitstring// } ]]; then 
-    PS1=$PS1" ${gitstring}"
-  fi
-  PS1=$PS1"$color]$RESET_COLOR "
+  # git stuff
+  gitstring=$(~/.bin/gitstatus)
 
+  PS1=$PS1"$color[$textcolor\w"
+  PS1=$PS1"$color]$RESET_COLOR"
+
+  if [[ ! -z ${gitstring// } ]]; then 
+    PS1=$PS1"$color[$textcolor${gitstring}$color]"
+  fi
+
+  PS1=$PS1"$RESET_COLOR "
 }
 
 # tmux stuff
