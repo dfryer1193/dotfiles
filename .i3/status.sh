@@ -13,10 +13,10 @@ CYAN="#6d878d"
 WHITE="#dddddd"
 
 process_json() {
-  EAT_ME=$1
-  button_name=$(echo ${EAT_ME} | jshon -e name)
+  raw_json=$1
+  button_name=$(echo ${raw_json} | jshon -e name)
   button_name=$(echo ${button_name} | sed 's/\"//g')
-  click_type=$(echo ${EAT_ME} | jshon -e button)
+  click_type=$(echo ${raw_json} | jshon -e button)
   case $button_name in
     volume)
       /bin/bash ~/.bin/soundctrl ${click_type} &>/dev/null
