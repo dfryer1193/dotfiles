@@ -67,7 +67,7 @@ nnoremap <C-Right> <C-w>l
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
 
-command! Fuck execute 'w !sudo tee % > /dev/null'
+command! Please execute 'w !sudo tee % > /dev/null'
 command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist fo-=c
 command! -nargs=* TNT NERDTreeTabsToggle
 
