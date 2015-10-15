@@ -120,8 +120,13 @@ set_prompt(){
   # todo.sh stuff
   numtasks=$(wc -l ~/.todo/todo.txt | grep -oE "[0-9]{1,}")
   if [[ ! -z ${numtasks} ]]; then
-    PS1=$PS11"$color[$textcolor$numtasks$color]$RESET_COLOR"
+    PS1=$PS1"$color[$textcolor$numtasks"
   fi
+  todo_has_changes=$(git -C ~/.todo status --porcelain)
+  if [[ ! -z "${todo_has_changes}" ]]; then
+    PS1=$PS1"!"
+  fi
+  PS1=$PS1"$color]$RESET_COLOR"
 
   # current dir
   PS1=$PS1"$color[$textcolor\w"
