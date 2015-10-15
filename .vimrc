@@ -74,10 +74,10 @@ command! -nargs=* TNT NERDTreeTabsToggle
 " vim-notes options
 let g:notes_directories=['~/AeroFS/School/MCC/','~/AeroFS/DnD/5E_WORLD/']
 let g:notes_suffix='.txt'
-let g:notes_unicode_enabled=0
+let g:notes_unicode_enabled=1
 
-let g:nerdtree_tabs_open_on_console_startup=1
-let NERDTreeDirArrows=0
+let g:nerdtree_tabs_open_on_console_startup=0
+let NERDTreeDirArrows=1
 
 let g:molokai_original=1
 
