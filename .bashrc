@@ -125,7 +125,7 @@ set_prompt(){
     fi
     todo_has_changes=$(git -C ~/.todo status --porcelain)
     if [[ ! -z "${todo_has_changes}" ]]; then
-      PS1=$PS1"!"
+      PS1=$PS1"$RED_BOLD!"
     fi
     PS1=$PS1"$color]$RESET_COLOR"
   fi
