@@ -114,8 +114,8 @@ set_prompt(){
     #last_cmd_stat=$wrong
   fi
 
-  # clear PS1
-  PS1=""
+  ## clear PS1
+  #PS1=""
 
   # todo.sh stuff
   if $(type todo.sh &>/dev/null); then
