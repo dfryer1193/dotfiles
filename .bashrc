@@ -83,6 +83,15 @@ fi
 
 unset env
 
+#
+# Functions
+#
+
+# launch programs from CLI
+launch(){
+  $@ &>/dev/null & disown
+}
+
 set_prompt(){
   last_cmd=$?
 	
