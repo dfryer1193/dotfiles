@@ -83,6 +83,15 @@ fi
 
 unset env
 
+#
+# Functions
+#
+
+# launch programs from CLI
+launch(){
+  $@ &>/dev/null & disown
+}
+
 set_prompt(){
   last_cmd=$?
 	
@@ -135,7 +144,7 @@ set_prompt(){
   PS1=$PS1"$color]$RESET_COLOR"
 
   # git stuff
-  if [[ -e "./.git" ]]; then
+  if git rev-parse &>/dev/null; then
     $(git remote update &>/dev/null)
     gitstring=$(~/.bin/gitstatus)
     if [[ ! -z ${gitstring// } ]]; then
