@@ -3,7 +3,7 @@
 # ~/.bash_aliases
 #
 
-alias ls='ls -lv --color=auto'
+alias ls='ls -lv --group-directories-first --color=auto'
 alias less='less -Rr'
 alias clc='clear'
 alias qq='exit'
