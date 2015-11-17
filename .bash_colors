@@ -3,22 +3,24 @@
 # ~/.bash_colors
 #
 
-export RESET_COLOR='\[\e[0m\]'
+export BOLD=$(tput bold)
 
-export BLACK='\[\e[0;30m\]'
-export RED='\[\e[0;31m\]'
-export GREEN='\[\e[0;32m\]'
-export YELLOW='\[\e[0;33m\]'
-export BLUE='\[\e[0;34m\]'
-export MAGENTA='\[\e[0;35m\]'
-export CYAN='\[\e[0;36m\]'
-export WHITE='\[\e[0;37m\]'
+export RESET_COLOR=$(tput sgr0)
 
-export BLACK_BOLD='\[\e[1;30m\]'
-export RED_BOLD='\[\e[1;31m\]'
-export GREEN_BOLD='\[\e[1;32m\]' 
-export YELLOW_BOLD='\[\e[1;33m\]'
-export BLUE_BOLD='\[\e[1;34m\]'
-export MAGENTA_BOLD='\[\e[1;35m\]'
-export CYAN_BOLD='\[\e[1;36m\]'
-export WHITE_BOLD='\[\e[1;37m\]'
+export BLACK=$(  tput setaf 0 || tput AF 0)
+export RED=$(    tput setaf 1 || tput AF 1)
+export GREEN=$(  tput setaf 2 || tput AF 2)
+export YELLOW=$( tput setaf 3 || tput AF 3)
+export BLUE=$(   tput setaf 4 || tput AF 4)
+export MAGENTA=$(tput setaf 5 || tput AF 5)
+export CYAN=$(   tput setaf 6 || tput AF 6)
+export WHITE=$(  tput setaf 7 || tput AF 7)
+
+export BLACK_BOLD=$BOLD$BLACK
+export RED_BOLD=$BOLD$RED
+export GREEN_BOLD=$BOLD$GREEN
+export YELLOW_BOLD=$BOLD$YELLOW
+export BLUE_BOLD=$BOLD$BLUE
+export MAGENTA_BOLD=$BOLD$MAGENTA
+export CYAN_BOLD=$BOLD$CYAN
+export WHITE_BOLD=$BOLD$WHITE
