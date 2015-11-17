@@ -111,7 +111,7 @@ set_prompt(){
 #  PS1=$PS1"$btmLCorner$btmDash($bold$color$last_cmd_stat$textcolor)\#\$>$reset "
 
   # Set window title properly
-  PS1="$(echo -ne '\033]2;\u@\h:\w\007')"
+  PS1="$(echo -ne '\[\033]2;\u@\h:\w\007\]')"
 
   if [[ $last_cmd == 0 ]]; then
     color=$GREEN_BOLD
