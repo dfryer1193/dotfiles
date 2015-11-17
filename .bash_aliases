@@ -3,7 +3,7 @@
 # ~/.bash_aliases
 #
 
-alias ls='ls -lv --color=auto'
+alias ls='ls -lv --group-directories-first --color=auto'
 alias less='less -Rr'
 alias clc='clear'
 alias qq='exit'
@@ -22,4 +22,4 @@ alias sudo='sudo '
 alias spclient='ncmpcpp -p 6601'
 alias todo='todo.sh'
 alias t='todo.sh'
-alias please='sudo $(fc -ln -1)'
+alias plz='sudo $(fc -ln -1)'

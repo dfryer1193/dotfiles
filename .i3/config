@@ -163,12 +163,12 @@ bindsym $mod+F12 exec amixer set Master 5%+
 bindsym $mod+F11 exec amixer set Master 5%-
 bindsym $mod+F10 exec amixer set Master toggle
 
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+
-bindsym XF86AudioLowerVolume exec amixer set Master 5%-
-bindsym XF86AudioMute exec amixer set Master toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
 
-bindsym XF86MonBrightnessUp exec xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 
 bindsym $mod+Shift+P sticky toggle
 bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable;
