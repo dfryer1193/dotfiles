@@ -46,6 +46,8 @@ set t_Co=256
 set timeoutlen=50
 set laststatus=2
 set colorcolumn=81
+set tw=80
+set fo+=t
 set splitbelow " new h splits go below
 set splitright " new v splits go right
 set foldmethod=syntax
