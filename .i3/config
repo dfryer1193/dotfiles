@@ -188,5 +188,6 @@ exec pidgin
 exec udiskie -s
 exec_always termite -t scratchpad -e "tmux new-session -s SCRATCH"; 
 for_window [title="^scratchpad$"] move scratchpad
+for_window [class="^Pidgin" window_role="^buddy_list"] move window to workspace 3
 
 for_window [class="^.*"] border pixel 0
