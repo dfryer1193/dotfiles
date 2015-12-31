@@ -74,7 +74,7 @@ command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist fo-=c
 command! -nargs=* TNT NERDTreeTabsToggle
 
 " vim-notes options
-let g:notes_directories=['~/AeroFS/School/MCC/','~/AeroFS/DnD/5E_WORLD/']
+let g:notes_directories=['~/AeroFS/School/MCC/','~/AeroFS/DnD/5E_WORLD/','~/doc']
 let g:notes_suffix='.txt'
 let g:notes_unicode_enabled=1
 
