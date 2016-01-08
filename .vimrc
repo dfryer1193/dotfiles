@@ -51,6 +51,7 @@ set fo+=t
 set splitbelow " new h splits go below
 set splitright " new v splits go right
 set foldmethod=syntax
+set listchars=eol:\ ,tab:>\ ,trail:~
 
 filetype plugin on
 syntax on
@@ -58,9 +59,10 @@ filetype indent on
 
 vmap Q gq
 nmap Q gqap
+nmap <leader>l :set list<CR>
 
 nnoremap j gj
-nnoremap <Down> gj 
+nnoremap <Down> gj
 nnoremap k gk
 nnoremap <Up> gk
 nnoremap <C-q> ,/ :nohlsearch<CR>
@@ -74,7 +76,11 @@ command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist fo-=c
 command! -nargs=* TNT NERDTreeTabsToggle
 
 " vim-notes options
-let g:notes_directories=['~/AeroFS/School/MCC/','~/AeroFS/DnD/5E_WORLD/','~/doc']
+let g:notes_directories=[
+      \ '~/AeroFS/School/MCC/',
+      \ '~/AeroFS/DnD/5E_WORLD/',
+      \ '~/doc'
+      \ ]
 let g:notes_suffix='.txt'
 let g:notes_unicode_enabled=1
 
@@ -108,7 +114,17 @@ vmap  <expr> <C-Up> DVB_Drag('up')
 highlight Pmenu ctermfg=7 ctermbg=8 guifg=#ffffff guibg=#000000
 
 if has("autocmd")
-  autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+  autocmd FileType make set
+        \ tabstop=8
+        \ shiftwidth=8
+        \ softtabstop=0
+        \ noexpandtab
+  autocmd BufRead,BufNewFile *.c,*.h set
+        \ tabstop=4
+        \ softtabstop=4
+        \ shiftwidth=4
+        \ filetype=c
+        \ noexpandtab
   autocmd VimResized * :wincmd =
   autocmd! bufwritepost .vimrc source .vimrc
 endif
