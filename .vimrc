@@ -51,6 +51,7 @@ set fo+=t
 set splitbelow " new h splits go below
 set splitright " new v splits go right
 set foldmethod=syntax
+set timeoutlen=3
 set listchars=eol:\ ,tab:>\ ,trail:~
 
 filetype plugin on
@@ -59,7 +60,7 @@ filetype indent on
 
 vmap Q gq
 nmap Q gqap
-nmap <leader>l :set list<CR>
+nmap <F3> :set list!<CR>
 
 nnoremap j gj
 nnoremap <Down> gj
