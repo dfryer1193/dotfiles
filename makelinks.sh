@@ -35,6 +35,7 @@ makelink .i3blocks.conf
 makelink .i3status.conf
 makelink .vim/autoload/airline/themes/murmur_modified.vim
 makelink .todo.cfg
+makelink .cliconkyrc
 
 for file in .config/*; do
   makelink $file
