@@ -1,0 +1,22 @@
+#!/bin/bash
+
+userlist=$(w -h | awk '{print $1}' | uniq)
+
+outstr=""
+prefix=""
+
+case $1 in
+  -t)
+    prefix="│   ├─"
+    ;;
+esac
+
+for user in ${userlist[@]}; do
+  if [[ "$user" -eq "${userlist[*]: -1}" ]]; then
+    outstr="$outstr│   └─ [ $user ]"
+  else
+    outstr="$outstr$prefix [ $user ]\n"
+  fi
+done
+
+echo -e "$outstr"
