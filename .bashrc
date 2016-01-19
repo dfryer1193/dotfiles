@@ -157,8 +157,12 @@ set_prompt(){
 
 # tmux stuff
 if which tmux >/dev/null 2>&1; then
+  sessions=($(tmux list-sessions  | \
+    awk '{print $1}'              | \
+    sed 's/://'                   | \
+    grep -oE "[0-9]{1,}"))
   # if not in tmux session, and no session exists, start a new session
-  test -z "$TMUX" && (tmux attach-session -t 1 || tmux)
+  test -z "$TMUX" && (tmux attach-session -t ${sessions[0]} || tmux)
 fi
 
 #type wego &>/dev/null && wego 1
