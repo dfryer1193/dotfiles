@@ -1,12 +1,13 @@
 conky.config = {
-	background = false,
-	cpu_avg_samples = 2,
-	net_avg_samples = 2,
-	no_buffers = false,
-	out_to_stderr = false,
-	update_interval = 1.0,
-	uppercase = false,
-	use_spacer = 'none',
+  background = false,
+  cpu_avg_samples = 2,
+  net_avg_samples = 2,
+  no_buffers = false,
+  out_to_stderr = false,
+  update_interval = 1.0,
+  uppercase = false,
+  use_spacer = 'none',
+  no_buffers = true,
   console_graph_ticks = " ,_,▁,▂,▃,▄,▅,▆,▇,█",
 };
 
