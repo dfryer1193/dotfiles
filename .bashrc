@@ -18,6 +18,7 @@ else
 fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
+export TERM=xterm-256color
 
 
 # For git+ssh
