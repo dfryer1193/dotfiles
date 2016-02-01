@@ -23,3 +23,6 @@ alias spclient='ncmpcpp -p 6601'
 alias todo='todo.sh'
 alias t='todo.sh'
 alias plz='sudo $(fc -ln -1)'
+if $(type nvim &>/dev/null) ; then
+  alias vim='nvim'
+fi

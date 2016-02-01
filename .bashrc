@@ -6,10 +6,10 @@
 [[ $- != *i* ]] && return
 
 . ~/.bash_aliases
+. ~/.bash_colors
 
 export HISTSIZE=10000
 if $(type nvim &>/dev/null) ; then
-  alias vim='nvim'
   export VISUAL=nvim visudo
   export EDITOR=nvim visudo
 else
@@ -19,18 +19,6 @@ fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
 
-. ~/.bash_colors
-
-function aa_256 ()  {
-  local o= i= x=`tput op` cols=`tput cols` y= oo= yy=;
-  y=`printf %$(($cols-6))s`;
-  yy=${y// /=};
-  for i in {0..256}; do
-    o=00${i};
-    oo=`echo -en "setaf ${i}\nsetab ${i}\n"|tput -S`;
-    echo -e "${o:${#o}-3:3} ${oo}${yy}${x}";
-  done;
-}
 
 # For git+ssh
 env=~/.ssh/agent.env
@@ -92,23 +80,19 @@ launch(){
   $@ &>/dev/null & disown
 }
 
+function aa_256 ()  {
+  local o= i= x=`tput op` cols=`tput cols` y= oo= yy=;
+  y=`printf %$(($cols-6))s`;
+  yy=${y// /=};
+  for i in {0..256}; do
+    o=00${i};
+    oo=`echo -en "setaf ${i}\nsetab ${i}\n"|tput -S`;
+    echo -e "${o:${#o}-3:3} ${oo}${yy}${x}";
+  done;
+}
+
 set_prompt(){
   last_cmd=$?
-	
-  #topLCorner='\342\224\214'
-  #midLside='\342\224\234'
-  #btmLCorner='\342\224\224'
-  #btmDash='\342\224\200'
-  #check='\342\234\223'
-  #wrong='\342\234\227'
-
-#  #PS1=""
-#  PS1=$PS1"$textcolor$topLCorner$bold$color[\u@\h \!]$textcolor\n"
-#  PS1=$PS1"$midLside$reset $textcolor\A \w\n"
-#  if [[ ! -z ${gitstring// } ]]; then
-#    PS1=$PS1"$midLside${gitstring}\n"
-#  fi
-#  PS1=$PS1"$btmLCorner$btmDash($bold$color$last_cmd_stat$textcolor)\#\$>$reset "
 
   # Set window title properly
   PS1="$(echo -ne '\[\033]2;\u@\h:\w\007\]')"
@@ -122,9 +106,6 @@ set_prompt(){
     textcolor=$RED
     #last_cmd_stat=$wrong
   fi
-
-  ## clear PS1
-  #PS1=""
 
   # todo.sh stuff
   if $(type todo.sh &>/dev/null); then
@@ -154,6 +135,14 @@ set_prompt(){
 
   PS1=$PS1"$RESET_COLOR "
 }
+
+################################################################################
+################################################################################
+#####                                                                     ######
+#####                  Execute before displaying prompt.                  ######
+#####                                                                     ######
+################################################################################
+################################################################################
 
 # tmux stuff
 if which tmux >/dev/null 2>&1; then
