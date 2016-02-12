@@ -1,7 +1,11 @@
 #!/bin/bash
-if [[ -e "/sys/class/power_supply/BAT0/capacity" ]]; then
-  level=$(cat /sys/class/power_supply/BAT0/capacity)
-  ac=$(cat /sys/class/power_supply/AC/online)
+
+BATTERY=($(ls /sys/class/power_supply | grep BAT))
+AC_ADAPTER=($(ls /sys/class/power_supply | grep AC))
+
+if [[ -e "/sys/class/power_supply/${BATTERY[0]}/capacity" ]]; then
+  level=$(cat /sys/class/power_supply/${BATTERY[0]}/capacity)
+  ac=$(cat /sys/class/power_supply/${AC_ADAPTER[0]}/online)
 fi
 
 if [[ $level != "" ]]; then
