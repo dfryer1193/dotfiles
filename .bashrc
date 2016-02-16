@@ -92,6 +92,29 @@ function aa_256 ()  {
   done;
 }
 
+unpack(){
+  file=$1
+
+  case $file in
+    *.zip)
+      unzip $file
+      ;;
+    *.tar.*|*.tbz2|*.tgz|*.txz)
+      tar -xf $file
+      ;;
+    *.rar)
+      unrar $file
+      ;;
+    *.7z)
+      7za x $file
+      ;;
+    *)
+      echo "I don't know this archive"
+      ;;
+  esac
+
+}
+
 set_prompt(){
   last_cmd=$?
 
