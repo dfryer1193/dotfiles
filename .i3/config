@@ -173,8 +173,8 @@ bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 bindsym $mod+Shift+P sticky toggle
 bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable;
 
-bindsym $win+L exec ~/.bin/py3lock.py
-bindsym $mod+Control+L exec ~/.bin/py3lock.py
+bindsym $win+L exec ~/.bin/screenlock.sh
+bindsym $mod+Control+L exec ~/.bin/screenlock.sh
 #i3lock -t -i ~/.config/themer/current/wallpaper.png
 
 exec --no-startup-id exec nm-applet
