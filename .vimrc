@@ -1,3 +1,4 @@
+let mapleader=","
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -27,7 +28,6 @@ Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 
-
 call vundle#end()
 
 set tabstop=2
@@ -43,7 +43,7 @@ set title
 set exrc
 set mouse=a
 set t_Co=256
-set timeoutlen=50
+set timeout timeoutlen=30 ttimeoutlen=30
 set laststatus=2
 set colorcolumn=81
 set tw=80

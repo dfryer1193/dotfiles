@@ -18,7 +18,7 @@ else
 fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
-export TERM=xterm-256color
+#export TERM=xterm-256color
 
 
 # For git+ssh
@@ -90,6 +90,29 @@ function aa_256 ()  {
     oo=`echo -en "setaf ${i}\nsetab ${i}\n"|tput -S`;
     echo -e "${o:${#o}-3:3} ${oo}${yy}${x}";
   done;
+}
+
+unpack(){
+  file=$1
+
+  case $file in
+    *.zip)
+      unzip $file
+      ;;
+    *.tar.*|*.tbz2|*.tgz|*.txz)
+      tar -xf $file
+      ;;
+    *.rar)
+      unrar $file
+      ;;
+    *.7z)
+      7za x $file
+      ;;
+    *)
+      echo "I don't know this archive"
+      ;;
+  esac
+
 }
 
 set_prompt(){
