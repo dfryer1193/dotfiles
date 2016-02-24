@@ -120,7 +120,7 @@ if has("autocmd")
         \ shiftwidth=8
         \ softtabstop=0
         \ noexpandtab
-  autocmd BufRead,BufNewFile *.c,*.h set
+  autocmd BufRead,BufNewFile *.c,*.h,*.cpp,*.C set
         \ tabstop=4
         \ softtabstop=4
         \ shiftwidth=4
