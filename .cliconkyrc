@@ -22,10 +22,10 @@ conky.text = [[ ${exec clear}              ▲
 ├─ system
 │   ├─ cpu
 │   │   ├─ used
-│   │   │   ├─ CPU1 [ ${cpu cpu1}%  ${cpubar 1} ]
-│   │   │   ├─ CPU2 [ ${cpu cpu2}%  ${cpubar 2} ]
-│   │   │   ├─ CPU3 [ ${cpu cpu3}%  ${cpubar 3} ]
-│   │   │   └─ CPU4 [ ${cpu cpu4}%  ${cpubar 4} ]
+│   │   │   ├─ CPU1 [ ${cpu cpu1}% ]
+│   │   │   ├─ CPU2 [ ${cpu cpu2}% ]
+│   │   │   ├─ CPU3 [ ${cpu cpu3}% ]
+│   │   │   └─ CPU4 [ ${cpu cpu4}% ]
 │   │   ├─ freq
 │   │   │   ├─ CPU1 [ ${freq_g 1}Ghz ]
 │   │   │   ├─ CPU2 [ ${freq_g 2}Ghz ]
