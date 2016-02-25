@@ -1,19 +1,24 @@
 #!/bin/bash
 
 userlist=$(w -h | awk '{print $1}' | uniq)
+sshfsusers=$(ps aux | grep -i sftp | grep -v grep | awk '{print $1}' | uniq)
+
+userlist=( "${userlist[@]}" "${sshfsusers[@]}" )
+userlist=$(echo ${userlist[@]} | uniq)
 
 outstr=""
 prefix=""
 
 case $1 in
   -t)
-    prefix="│   ├─"
+    prefix="│  ├─"
+    lastprefix="│   └─"
     ;;
 esac
 
 for user in ${userlist[@]}; do
   if [[ "$user" -eq "${userlist[*]: -1}" ]]; then
-    outstr="$outstr│   └─ [ $user ]"
+    outstr="$outstr$lastprefix [ $user ]"
   else
     outstr="$outstr$prefix [ $user ]\n"
   fi

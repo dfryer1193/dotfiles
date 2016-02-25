@@ -27,10 +27,10 @@ conky.text = [[ ${exec clear}              ▲
 │   │   │   ├─ CPU3 [ ${cpu cpu3}% ]
 │   │   │   └─ CPU4 [ ${cpu cpu4}% ]
 │   │   ├─ freq
-│   │   │   ├─ CPU1 [ ${freq_g 1}Ghz ]
-│   │   │   ├─ CPU2 [ ${freq_g 2}Ghz ]
-│   │   │   ├─ CPU3 [ ${freq_g 3}Ghz ]
-│   │   │   └─ CPU4 [ ${freq_g 4}Ghz ]
+│   │   │   ├─ CPU1 [ ${freq_g 1}Ghz ]	CPU5 [ ${freq_g 5}Ghz ]
+│   │   │   ├─ CPU2 [ ${freq_g 2}Ghz ]	CPU6 [ ${freq_g 6}Ghz ]
+│   │   │   ├─ CPU3 [ ${freq_g 3}Ghz ]	CPU7 [ ${freq_g 7}Ghz ]
+│   │   │   └─ CPU4 [ ${freq_g 4}Ghz ]	CPU8 [ ${freq_g 8}Ghz ]
 │   │   │
 │   │   ├─ load [ ${loadavg} ]
 │   │   ├─ [ ${top name 1}  ${top cpu 1} ]
@@ -60,6 +60,8 @@ conky.text = [[ ${exec clear}              ▲
 │   │   └─ [ ${top_mem name 5}  ${top_mem mem_res 5} ]
 │   ├─ swap [ $swapfree ${swapbar} ]
 │   ├─ root [ ${fs_free /} ${fs_bar /} ]
+│   │   ├─ squirtle  [ ${fs_free /data/squirtle} ${fs_bar /data/squirtle} ]
+│   │   └─ bulbasaur [ ${fs_free /data/bulbasaur} ${fs_bar /data/bulbasaur} ]
 │   └─ home [ ${fs_free /home}  ${fs_bar /home} ]
 │
 ├─ users
