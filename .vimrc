@@ -27,6 +27,7 @@ Plugin 'xolox/vim-notes'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
+Plugin 'dhruvasagar/vim-table-mode'
 
 call vundle#end()
 
@@ -80,7 +81,8 @@ command! -nargs=* TNT NERDTreeTabsToggle
 let g:notes_directories=[
       \ '~/AeroFS/School/MCC/',
       \ '~/AeroFS/DnD/5E_WORLD/',
-      \ '~/doc'
+      \ '~/doc',
+      \ '~/AeroFS/DnD/DnD_Next/'
       \ ]
 let g:notes_suffix='.txt'
 let g:notes_unicode_enabled=1
@@ -93,6 +95,10 @@ let g:molokai_original=1
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 let g:airline_theme='murmur_modified'
+
+" vim-table-mode settings
+let g:table_mode_corner_corner="+"
+let g:table_mode_header_fillchar="="
 
 " Highlight merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
