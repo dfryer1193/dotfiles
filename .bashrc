@@ -20,8 +20,10 @@ export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export PATH="$HOME/scripts:$HOME/.bin:$PATH"
 #export TERM=xterm-256color
 
-
+#
 # For git+ssh
+#
+
 env=~/.ssh/agent.env
 
 agent_is_running() {
@@ -167,6 +169,22 @@ set_prompt(){
 #####                                                                     ######
 ################################################################################
 ################################################################################
+
+# always update window size
+shopt -s checkwinsize
+
+# trim long paths in prompt
+PROMPT_DIRTRIM=2
+
+#
+# better tab completion
+#
+
+# ignore case
+bind "set completion-ignore-case on"
+
+# - == _
+bind "set completion-map-case on"
 
 # tmux stuff
 if which tmux >/dev/null 2>&1; then
