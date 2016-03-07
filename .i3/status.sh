@@ -48,9 +48,9 @@ while :; do
       echo "\"border_top\":0,"
       echo "\"background\":\"$BLACK\","
       echo "\"full_text\":\" $(/usr/lib/i3blocks/disk | head -n 1) \""
-    echo "},"
+    echo "}"
     # temperature 
-    echo '{'
+    echo ',{'
       echo "\"name\":\"temperature\","
       echo "\"border\":\"$GREEN\","
       echo "\"border_left\":0,"
@@ -58,9 +58,9 @@ while :; do
       echo "\"border_top\":0,"
       echo "\"background\":\"$BLACK\","
       echo "\"full_text\":\" $(/usr/lib/i3blocks/temperature | tail -n 1) \""
-    echo "},"
+    echo "}"
     # volume
-    echo '{'
+    echo ',{'
       echo "\"name\":\"volume\","
       echo "\"border\":\"$BLUE\","
       echo "\"border_left\":0,"
@@ -68,9 +68,9 @@ while :; do
       echo "\"border_top\":0,"
       echo "\"background\":\"$BLACK\","
       echo "\"full_text\":\" $(~/.bin/soundstate) \""
-    echo "},"
+    echo "}"
     # date
-    echo '{'
+    echo ',{'
       echo "\"name\":\"date\","
       echo "\"border\":\"$WHITE\","
       echo "\"border_left\":0,"
@@ -78,9 +78,9 @@ while :; do
       echo "\"border_top\":0,"
       echo "\"background\":\"$BLACK\","
       echo "\"full_text\":\" $(date '+%a %m.%d.%y') \""
-    echo "},"
+    echo "}"
     # time
-    echo '{'
+    echo ',{'
       echo "\"name\":\"time\","
       echo "\"border\":\"$RED\","
       echo "\"border_left\":0,"
