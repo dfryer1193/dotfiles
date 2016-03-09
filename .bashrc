@@ -174,7 +174,7 @@ set_prompt(){
 shopt -s checkwinsize
 
 # trim long paths in prompt
-PROMPT_DIRTRIM=2
+#PROMPT_DIRTRIM=2
 
 #
 # better tab completion
