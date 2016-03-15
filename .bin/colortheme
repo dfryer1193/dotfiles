@@ -9,6 +9,7 @@ usage() {
   echo "    -b: boxes"
   echo "    -i: invaders"
   echo "    -p pacman"
+  echo "    --pkmn pokemon"
   echo "    -h this"
 }
 
@@ -128,6 +129,9 @@ case $1 in
     ;;
   -p)
     pac
+    ;;
+  --pkmn)
+    ~/.bin/pokemon
     ;;
   -a)
     boxes
