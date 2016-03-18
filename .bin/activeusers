@@ -18,7 +18,7 @@ esac
 
 for user in ${userlist[@]}; do
   if [[ "$user" -eq "${userlist[*]: -1}" ]]; then
-    outstr="$outstr$lastprefix [ $user ]"
+    outstr="$outstr$lastprefix [ $user ]\n"
   else
     outstr="$outstr$prefix [ $user ]\n"
   fi
