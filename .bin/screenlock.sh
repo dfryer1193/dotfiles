@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [[ ! $(type i3lock &>/dev/null) ]]; then
+if $(type i3lock &>/dev/null); then
   locker=i3lock
 else
   locker=i3lock-color
