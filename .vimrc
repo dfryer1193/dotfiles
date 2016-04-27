@@ -19,15 +19,17 @@ Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-fugitive'
 Plugin 'PotatoesMaster/i3-vim-syntax'
 Plugin 'tpope/vim-endwise'
-Plugin 'rstacruz/vim-closer'
+Plugin 'jiangmiao/auto-pairs'
 Plugin 'atweiden/vim-dragvisuals'
 Plugin 'keith/tmux.vim'
 Plugin 'xolox/vim-misc'
 Plugin 'xolox/vim-notes'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'vim-pandoc/vim-pandoc'
 Plugin 'vim-pandoc/vim-pandoc-syntax'
 Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'fatih/vim-go'
+Plugin 'shougo/deoplete.nvim'
 
 call vundle#end()
 
@@ -87,11 +89,15 @@ let g:notes_directories=[
 let g:notes_suffix='.txt'
 let g:notes_unicode_enabled=1
 
+" NERDTree options
 let g:nerdtree_tabs_open_on_console_startup=0
 let NERDTreeDirArrows=1
 
+" Colors!
 let g:molokai_original=1
+highlight Search ctermbg=000
 
+" vim-airline options
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
 let g:airline_theme='murmur_modified'
@@ -107,19 +113,22 @@ match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
 nnoremap <silent> ]c /\v^(\<\|\=\|\>){7}([^=].+)?$<CR>
 nnoremap <silent> [c ?\v^(\<\|\=\|\>){7}([^=].+)\?$<CR>
 
-highlight Search ctermbg=000
-
 " Remove any introduced trailing whitespace after moving...
-let g:DVB_TrimWS = 1
+let g:DVB_TrimWS=1
 
+" Move blocks of code
 vmap  <expr> <C-Left> DVB_Drag('left')
 vmap  <expr> <C-Right> DVB_Drag('right')
 vmap  <expr> <C-Down> DVB_Drag('down')
 vmap  <expr> <C-Up> DVB_Drag('up')
 
-" YCM popup color change
-highlight Pmenu ctermfg=7 ctermbg=8 guifg=#ffffff guibg=#000000
+" Auto-pairs config
+let g:AutoPairsShortcutToggle='<C-S-p>'
 
+" deoplete
+let g:deoplete#enable_at_startup=1
+
+" Filetype-specific stuff
 if has("autocmd")
   autocmd FileType make set
         \ tabstop=8
@@ -132,6 +141,11 @@ if has("autocmd")
         \ shiftwidth=4
         \ filetype=c
         \ noexpandtab
+  autocmd FileType go set
+        \ tabstop=8
+        \ shiftwidth=8
+        \ softtabstop=0
+        \ noexpandtab
   autocmd VimResized * :wincmd =
-  autocmd! bufwritepost .vimrc source .vimrc
+  autocmd! bufwritepost .vimrc source ~/.vimrc
 endif
