@@ -21,6 +21,8 @@ process_json() {
     volume)
       /bin/bash ~/.bin/soundctrl ${click_type} &>/dev/null
       ;;
+    mediastate)
+      /bin/bash ~/.bin/mediactrl ${click_type} &>/dev/null
   esac
 }
 
@@ -69,10 +71,20 @@ while :; do
       echo "\"background\":\"$BLACK\","
       echo "\"full_text\":\" $(~/.bin/soundstate) \""
     echo "}"
+    # media state
+    echo ',{'
+      echo "\"name\":\"mediastate\","
+      echo "\"border\":\"$WHITE\","
+      echo "\"border_left\":0,"
+      echo "\"border_right\":0,"
+      echo "\"border_top\":0,"
+      echo "\"background\":\"$BLACK\","
+      echo "\"full_text\":\" $(~/.bin/getmediastate)\""
+    echo "}"
     # date
     echo ',{'
       echo "\"name\":\"date\","
-      echo "\"border\":\"$WHITE\","
+      echo "\"border\":\"$RED\","
       echo "\"border_left\":0,"
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
@@ -82,7 +94,7 @@ while :; do
     # time
     echo ',{'
       echo "\"name\":\"time\","
-      echo "\"border\":\"$RED\","
+      echo "\"border\":\"$GREEN\","
       echo "\"border_left\":0,"
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
