@@ -79,7 +79,7 @@ while :; do
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
       echo "\"background\":\"$BLACK\","
-      echo "\"full_text\":\" $(~/.bin/getmediastate)\""
+      echo "\"full_text\":\" $(~/.bin/getmediastate) \""
     echo "}"
     # date
     echo ',{'
