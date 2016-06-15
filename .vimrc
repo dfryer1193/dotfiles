@@ -30,6 +30,7 @@ Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'fatih/vim-go'
 Plugin 'shougo/deoplete.nvim'
+Plugin 'Konfekt/FastFold'
 
 call vundle#end()
 
@@ -83,6 +84,7 @@ command! -nargs=* TNT NERDTreeTabsToggle
 let g:notes_directories=[
       \ '~/AeroFS/School/MCC/',
       \ '~/AeroFS/DnD/5E_WORLD/',
+      \ '~/AeroFS/DnD/NovaCommune/',
       \ '~/doc',
       \ '~/AeroFS/DnD/DnD_Next/'
       \ ]

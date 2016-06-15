@@ -182,6 +182,7 @@ exec --no-startup-id exec nm-applet
 exec ~/.screenlayout/default.sh
 exec compton -b
 exec start-pulseaudio-x11
+exec albert
 exec mpd
 exec mopidy
 exec aerofs

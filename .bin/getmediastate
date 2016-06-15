@@ -32,7 +32,7 @@ else # prefer local
 fi
 
 if [[ "${playstatus}" == "[playing]" ]]; then
-  echo  ${track} - ${tracktime}
-elif [[ "${playstatus}" == "[paused]" ]]; then
   echo  ${track} - ${tracktime}
+elif [[ "${playstatus}" == "[paused]" ]]; then
+  echo  ${track} - ${tracktime}
 fi
