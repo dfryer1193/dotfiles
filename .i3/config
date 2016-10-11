@@ -185,7 +185,7 @@ exec start-pulseaudio-x11
 exec albert
 exec mpd
 exec mopidy
-exec aerofs
+exec dropbox
 exec udiskie -s
 exec_always termite -t scratchpad -e "tmux new-session -s SCRATCH"; 
 for_window [title="^scratchpad$"] move scratchpad
