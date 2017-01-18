@@ -115,6 +115,8 @@ bar {
 
     position          top
     workspace_buttons yes
+    # set primary monitor with xrandr --output <output> --primary
+    tray_output primary
     
     font pango:Meslo LG S DZ 10
  
