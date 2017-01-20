@@ -187,7 +187,10 @@ bind "set completion-ignore-case on"
 # - == _
 bind "set completion-map-case on"
 
+#
 # tmux stuff
+#
+
 if which tmux >/dev/null 2>&1; then
   sessions=($(tmux list-sessions  | \
     awk '{print $1}'              | \

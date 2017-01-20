@@ -148,6 +148,8 @@ if has("autocmd")
         \ shiftwidth=8
         \ softtabstop=0
         \ noexpandtab
+  autocmd BufNewFile,BufReadPost *.md set
+        \ filetype=markdown.pandoc
   autocmd VimResized * :wincmd =
   autocmd! bufwritepost .vimrc source ~/.vimrc
 endif
