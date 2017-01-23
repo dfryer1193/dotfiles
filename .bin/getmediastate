@@ -14,10 +14,25 @@ mpd_info(){
   mpd_tracktime=$(echo $mpd_mpcstat | grep -oE "([0-9]+)\:([0-9]+)/([0-9]+)\:([0-9]+)")
 }
 
+playerctl_info(){
+  player_title=$(playerctl metadata title)
+  player_artist=$(playerctl metadata artist)
+  player_track="${player_artist} - ${player_title}"
+  player_status=$(playerctl status | grep -oE "(P)(laying|aused)")
+}
+
 mpd_info
 spotify_info
+playerctl_info
 
-if [[ "${mpd_status}" == "[playing]" ]]; then
+if [[ ! -z "${player_status}" ]]; then
+  if [[ "${player_status}" == "Playing" ]]; then
+    playstatus="[playing]"
+  else
+    playstatus="[paused]"
+  fi
+  track=${player_track}
+elif [[ "${mpd_status}" == "[playing]" ]]; then
   playstatus=$mpd_status
   track=$mpd_track
   tracktime=$mpd_tracktime
@@ -25,14 +40,18 @@ elif [[ "${sp_status}" == "[playing]" || -z "${mpd_status}" ]]; then
   playstatus=$sp_status
   track=$sp_track
   tracktime=$sp_tracktime
-else # prefer local
-  playstatus=$mpd_status
-  track=$mpd_track
-  tracktime=$mpd_tracktime
 fi
 
+out=""
+
 if [[ "${playstatus}" == "[playing]" ]]; then
-  echo  ${track} - ${tracktime}
+  out=" ${track}"
 elif [[ "${playstatus}" == "[paused]" ]]; then
-  echo  ${track} - ${tracktime}
+  out=" ${track}"
 fi
+
+if [[ ! -z "${tracktime}" ]]; then
+  out="${out} - ${tracktime}"
+fi
+
+echo $out
