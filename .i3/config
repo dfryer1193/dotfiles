@@ -23,7 +23,7 @@ set $ws10 "10"
 font pango:Meslo LG S DZ for Powerline 10
 #font pango:DejaVu Sans Mono 8
 
-exec_always feh --bg-scale ~/.wallpaper.png
+exec_always feh --bg-fill ~/.wallpaper.png
 #exec_always ~/.bin/worldbackground
 
 floating_modifier $mod
