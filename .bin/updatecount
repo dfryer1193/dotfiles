@@ -1,0 +1,12 @@
+#!/bin/bash
+
+updateStr=$(pacman -Qu)
+
+hasLinux=$(grep "linux" <<< ${updateStr})
+updates=$(wc -l <<< ${updateStr})
+
+if [[ ${hasLinux} ]]; then
+  echo "⬆⟳ ${updates}"
+else
+  echo "⬆ ${updates}"
+fi
