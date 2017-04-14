@@ -13,7 +13,10 @@ CYAN="#6d878d"
 WHITE="#dddddd"
 
 # count, for not doing things every second
+# resetTime, time when count resets
 count=0
+resetTime=$(( 4 * 3600 ))
+updatecount=$(~/.bin/updatecount)
 
 process_json() {
   raw_json=$1
@@ -130,7 +133,13 @@ while :; do
       echo "}"
     fi
   echo "]"
-  if [[ $count -lt 60 ]]; then
+  # update updatecount every hour
+  if [[ $(( count % 3600 )) -eq 0 ]]; then
+    updatecount="$(~/.bin/updatecount)"
+  fi
+  # Reset the count every $resetTime seconds. This is arbitrary, and probably
+  # not necessary.
+  if [[ $count -ge $resetTime ]]; then
     count=0
   else
     count=$(( count + 1 ))
