@@ -12,6 +12,9 @@ MAGENTA="#b7416e"
 CYAN="#6d878d"
 WHITE="#dddddd"
 
+# count, for not doing things every second
+count=0
+
 process_json() {
   raw_json=$1
   button_name=$(echo ${raw_json} | jshon -e name)
@@ -51,10 +54,22 @@ while :; do
       echo "\"background\":\"$BLACK\","
       echo "\"full_text\":\" $(/usr/lib/i3blocks/disk | head -n 1) \""
     echo "}"
+    # how many updates?
+    if [[ $count -lt 60 ]]; then
+      echo ',{'
+        echo "\"name\":\"updates\","
+        echo "\"border\":\"$GREEN\","
+        echo "\"border_left\":0,"
+        echo "\"border_right\":0,"
+        echo "\"border_top\":0,"
+        echo "\"background\":\"$BLACK\","
+        echo "\"full_text\":\" $(~/.bin/updatecount) \""
+      echo "}"
+    fi
     # temperature 
     echo ',{'
       echo "\"name\":\"temperature\","
-      echo "\"border\":\"$GREEN\","
+      echo "\"border\":\"$BLUE\","
       echo "\"border_left\":0,"
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
@@ -64,7 +79,7 @@ while :; do
     # volume
     echo ',{'
       echo "\"name\":\"volume\","
-      echo "\"border\":\"$BLUE\","
+      echo "\"border\":\"$WHITE\","
       echo "\"border_left\":0,"
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
@@ -74,7 +89,7 @@ while :; do
     # media state
     echo ',{'
       echo "\"name\":\"mediastate\","
-      echo "\"border\":\"$WHITE\","
+      echo "\"border\":\"$RED\","
       echo "\"border_left\":0,"
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
@@ -84,7 +99,7 @@ while :; do
     # date
     echo ',{'
       echo "\"name\":\"date\","
-      echo "\"border\":\"$RED\","
+      echo "\"border\":\"$GREEN\","
       echo "\"border_left\":0,"
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
@@ -94,7 +109,7 @@ while :; do
     # time
     echo ',{'
       echo "\"name\":\"time\","
-      echo "\"border\":\"$GREEN\","
+      echo "\"border\":\"$BLUE\","
       echo "\"border_left\":0,"
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
@@ -106,7 +121,7 @@ while :; do
     if [[ ! -z ${battery} ]]; then
       echo ',{'
         echo "\"name\":\"battery\","
-        echo "\"border\":\"$GREEN\","
+        echo "\"border\":\"$WHITE\","
         echo "\"border_left\":0,"
         echo "\"border_right\":0,"
         echo "\"border_top\":0,"
@@ -115,6 +130,11 @@ while :; do
       echo "}"
     fi
   echo "]"
+  if [[ $count -lt 60 ]]; then
+    count=0
+  else
+    count=$(( count + 1 ))
+  fi
   read -t 1 tmp <&0
   tmp=$(echo ${tmp} | sed 's/^,//')
   if [[ ! -z $tmp ]] && [[ "$tmp" != "[" ]]; then
