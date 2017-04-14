@@ -56,17 +56,16 @@ while :; do
       echo "\"full_text\":\" $(/usr/lib/i3blocks/disk | head -n 1) \""
     echo "}"
     # how many updates?
-    if [[ $count -lt 60 ]]; then
-      echo ',{'
-        echo "\"name\":\"updates\","
-        echo "\"border\":\"$GREEN\","
-        echo "\"border_left\":0,"
-        echo "\"border_right\":0,"
-        echo "\"border_top\":0,"
-        echo "\"background\":\"$BLACK\","
-        echo "\"full_text\":\" $(~/.bin/updatecount) \""
-      echo "}"
-    fi
+    # runs every hour
+    echo ',{'
+      echo "\"name\":\"updates\","
+      echo "\"border\":\"$GREEN\","
+      echo "\"border_left\":0,"
+      echo "\"border_right\":0,"
+      echo "\"border_top\":0,"
+      echo "\"background\":\"$BLACK\","
+      echo "\"full_text\":\" ${updatecount} \""
+    echo "}"
     # temperature 
     echo ',{'
       echo "\"name\":\"temperature\","
