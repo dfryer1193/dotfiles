@@ -106,7 +106,7 @@ unpack(){
       tar -xf $file
       ;;
     *.rar)
-      unrar $file
+      unrar x $file
       ;;
     *.7z)
       7za x $file
