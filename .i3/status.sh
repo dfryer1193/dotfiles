@@ -26,6 +26,7 @@ process_json() {
       ;;
     mediastate)
       /bin/bash ~/.bin/mediactrl ${click_type} &>/dev/null
+      ;;
   esac
 }
 
