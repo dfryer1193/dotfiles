@@ -1,6 +1,6 @@
 #!/bin/bash
 
-updateStr=$(pacman -Qu)
+updateStr=$(checkupdates)
 
 hasLinux=$(grep "linux" <<< ${updateStr})
 updates=$(wc -l <<< ${updateStr})
