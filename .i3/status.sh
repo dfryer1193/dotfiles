@@ -77,7 +77,7 @@ while :; do
       echo "\"border_right\":0,"
       echo "\"border_top\":0,"
       echo "\"background\":\"$BLACK\","
-      echo "\"full_text\":\" $(/usr/lib/i3blocks/temperature | tail -n 1) \""
+      echo "\"full_text\":\" $(~/.bin/temperature) \""
     echo "}"
     # volume
     echo ',{'
