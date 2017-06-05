@@ -17,8 +17,9 @@ if [[ $level != "" ]]; then
     outstr="${outstr}BAT:"
   fi
   
-  if [[ $level < "15" && $level != "100" ]]; then
+  if [[ $level -lt 15 ]]; then
     notify-send 'Low Battery' 'Your battery is below 15%.'
+    outstr="!!!${outstr}"
   fi
    
   outstr="${outstr}${level}%"
