@@ -7,7 +7,14 @@ else
 fi
 
 scrot /tmp/screenshot.png
-convert /tmp/screenshot.png -blur 0x7 /tmp/screenshotblur.png
+if [ -e ~/.bin/stackblur ] ; then
+  ~/.bin/stackblur \
+    -in /tmp/screenshot.png \
+    -out /tmp/screenshotblur.png \
+    -radius 7 &> /dev/null
+else
+  convert /tmp/screenshot.png -blur 0x7 /tmp/screenshotblur.png
+fi
 rm -f /tmp/screenshot.png
 
 $locker -i /tmp/screenshotblur.png \
