@@ -17,8 +17,8 @@ else
   export EDITOR=vim visudo
 fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
-export PATH="$HOME/scripts:$HOME/.bin:$PATH"
 export GOPATH="$HOME/workspace/.go"
+export PATH="$HOME/scripts:$HOME/.bin:$GOPATH/bin:$PATH"
 #export TERM=xterm-256color
 
 #
