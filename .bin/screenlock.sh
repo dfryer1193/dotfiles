@@ -11,7 +11,7 @@ if [ -e ~/.bin/stackblur ] ; then
   ~/.bin/stackblur \
     -in /tmp/screenshot.png \
     -out /tmp/screenshotblur.png \
-    -radius 7 &> /dev/null
+    -radius 15 &> /dev/null
 else
   convert /tmp/screenshot.png -blur 0x7 /tmp/screenshotblur.png
 fi
