@@ -3,7 +3,7 @@
 # ~/.bash_aliases
 #
 
-alias ls='ls -lv --group-directories-first --color=always'
+alias ls='ls -lvh --group-directories-first --color=always'
 alias less='less -Rr'
 alias clc='clear'
 alias qq='exit'
@@ -24,6 +24,7 @@ alias todo='todo.sh'
 alias t='todo.sh'
 alias plz='sudo $(fc -ln -1)'
 alias dd='dd status=progress'
+alias kc='kubectl'
 if $(type nvim &>/dev/null) ; then
   alias vim='nvim'
 fi
