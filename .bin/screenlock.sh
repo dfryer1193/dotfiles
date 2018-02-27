@@ -1,32 +1,19 @@
 #!/bin/bash
 
-if $(type i3lock &>/dev/null); then
-  locker=i3lock
-else
-  locker=i3lock-color
-fi
-
-scrot /tmp/screenshot.png
-if [ -e ~/.bin/stackblur ] ; then
-  ~/.bin/stackblur \
-    -in /tmp/screenshot.png \
-    -out /tmp/screenshotblur.png \
-    -radius 15 &> /dev/null
-else
-  convert /tmp/screenshot.png -blur 0x7 /tmp/screenshotblur.png
-fi
-rm -f /tmp/screenshot.png
-
-$locker -i /tmp/screenshotblur.png \
+i3lock -B=15 \
+   -k \
   --insidevercolor=dddddd55 \
   --insidewrongcolor=e84f4f55 \
   --insidecolor=66666655 \
   --ringvercolor=ccccccff \
   --ringwrongcolor=d23d3dff \
   --ringcolor=222222ff \
-  --textcolor=00000000 \
+  --line-uses-inside \
   --keyhlcolor=dddddd22 \
-  --bshlcolor=e84f4f22
-
-# cleanup
-rm -f /tmp/screenshotblur.png
+  --bshlcolor=e84f4f22 \
+  --timestr="%H:%M:%S" \
+  --timepos="x+w-(1.5*r):y+h-(0.5*r)" \
+  --timecolor=ccccccff \
+  --time-font=monospace \
+  --timesize=25 \
+  --datestr=""
