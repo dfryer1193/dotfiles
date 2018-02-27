@@ -28,3 +28,7 @@ alias kc='kubectl'
 if $(type nvim &>/dev/null) ; then
   alias vim='nvim'
 fi
+# from https://salferrarello.com/improve-git-log/
+alias gl='git log --graph --pretty=format:"%h - %d %s (%cr) <%an>" | vim -R \
+  -c "set hidden nowrap keywordprg=:enew\ \|\ terminal\ \git\ --no-pager\ show |
+  nnoremap q :bd!<cr>" -'
