@@ -1,7 +1,10 @@
 #!/bin/bash
 
+notify-send DUNST_COMMAND_PAUSE
+
 i3lock -B=15 \
    -k \
+   -n \
   --insidevercolor=dddddd55 \
   --insidewrongcolor=e84f4f55 \
   --insidecolor=66666655 \
@@ -17,3 +20,5 @@ i3lock -B=15 \
   --time-font=monospace \
   --timesize=25 \
   --datestr=""
+
+notify-send DUNST_COMMAND_RESUME
