@@ -187,7 +187,6 @@ bindsym $mod+i exec --no-startup-id ~/.bin/bettertext.sh
 
 bindsym $win+L exec ~/.bin/screenlock.sh
 bindsym $mod+Control+L exec ~/.bin/screenlock.sh
-#i3lock -t -i ~/.config/themer/current/wallpaper.png
 
 exec --no-startup-id exec nm-applet
 exec ~/.screenlayout/default.sh
@@ -198,7 +197,14 @@ exec mpd
 exec mopidy
 exec dropbox
 exec udiskie -s
-exec_always termite -t scratchpad -e "tmux new-session -s SCRATCH"; 
+exec_always termite -t scratchpad -e "tmux new-session -s SCRATCH"
+
+# Window Modifications
+
 for_window [title="^scratchpad$"] move scratchpad
+
+for_window [title="^vimedit$"] floating enable
+for_window [title="^vimedit$"] resize set 800 600
+for_window [title="^vimedit$"] sticky enable
 
 for_window [class="^.*"] border pixel 0
