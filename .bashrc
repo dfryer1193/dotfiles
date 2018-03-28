@@ -200,6 +200,11 @@ if which tmux >/dev/null 2>&1; then
   test -z "$TMUX" && (tmux attach-session -t ${sessions[0]} || tmux)
 fi
 
+# If not in tmux, set the terminal type.
+if [[ -z "${TMUX}" ]]; then
+  export TERM=xterm-256color
+fi
+
 #type wego &>/dev/null && wego 1
 
 type todo.sh &>/dev/null && (todo.sh pull &>/dev/null; todo.sh ls)
