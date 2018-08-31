@@ -23,6 +23,8 @@ fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
 export GOPATH="$HOME/workspace/.go"
 export PATH="$HOME/scripts:$HOME/.bin:$GOPATH/bin:$PATH"
+export GIT_FETCH_REMOTE_INFO=true
+
 #export TERM=xterm-256color
 
 #
@@ -155,12 +157,16 @@ set_prompt(){
   PS1=$PS1"$color[$textcolor\w"
   PS1=$PS1"$color]$RESET_COLOR"
 
+  # TODO: Make this deal with git remote being down
+
   # git stuff
-  if git rev-parse &>/dev/null; then
-    $(git remote update &>/dev/null)
-    gitstring=$(~/.bin/gitstatus)
-    if [[ ! -z ${gitstring// } ]]; then
-      PS1=$PS1"$color[$textcolor${gitstring}$color]"
+  if [[ ! -z $GIT_FETCH_REMOTE_INFO ]]; then
+    if git rev-parse &>/dev/null; then
+      $(git remote update &>/dev/null)
+      gitstring=$(~/.bin/gitstatus)
+      if [[ ! -z ${gitstring// } ]]; then
+        PS1=$PS1"$color[$textcolor${gitstring}$color]"
+      fi
     fi
   fi
 
