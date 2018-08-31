@@ -3,7 +3,11 @@
 # ~/.bash_aliases
 #
 
-alias ls='ls -lvh --group-directories-first --color=always'
+if $(type exa &>/dev/null) ; then
+  alias ls='exa -l --group-directories-first --color=always --git'
+else
+  alias ls='ls -lvh --group-directories-first --color=always'
+fi
 alias less='less -Rr'
 alias clc='clear'
 alias qq='exit'
@@ -27,6 +31,10 @@ alias dd='dd status=progress'
 alias kc='kubectl'
 if $(type nvim &>/dev/null) ; then
   alias vim='nvim'
+fi
+
+if $(type bat &>/dev/null) ; then
+  alias cat='bat'
 fi
 # from https://salferrarello.com/improve-git-log/
 alias gl='git log --graph --pretty=format:"%h - %d %s (%cr) <%an>" | vim -R \
