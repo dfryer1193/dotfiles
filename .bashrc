@@ -8,6 +8,10 @@
 . ~/.bash_aliases
 . ~/.bash_colors
 
+if [[ -e ~/.bash_workstuff ]]; then
+  . ~/.bash_workstuff
+fi
+
 export HISTSIZE=10000
 if $(type nvim &>/dev/null) ; then
   export VISUAL=nvim visudo
