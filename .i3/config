@@ -210,8 +210,8 @@ bindsym $mod+Control+L exec ~/.bin/screenlock.sh
 
 exec --no-startup-id exec nm-applet
 exec --no-startup-id exec blueman-applet
-exec ~/.screenlayout/default.sh
-exec compton -b
+exec_always ~/.screenlayout/default.sh
+exec_always allow_rgb10_configs=false compton -b
 exec start-pulseaudio-x11
 exec albert
 exec mpd
