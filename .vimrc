@@ -7,6 +7,7 @@ call vundle#begin()
 Plugin 'Align'
 Plugin 'cecutil'
 Plugin 'vis'
+Plugin 'ifdef-highlighting'
 
 Plugin 'gmarik/Vundle.vim'
 Plugin 'kien/ctrlp.vim'
@@ -32,6 +33,7 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'fatih/vim-go'
 Plugin 'shougo/deoplete.nvim'
 Plugin 'Konfekt/FastFold'
+Plugin 'lambdalisue/suda.vim'
 
 call vundle#end()
 
@@ -77,7 +79,7 @@ nnoremap <C-Right> <C-w>l
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
 
-command! Please execute 'w !sudo tee % > /dev/null'
+command! Please :execute ':w suda://%'
 command! -nargs=* Wrap setlocal tw=80 wrap linebreak nolist fo-=c
 command! -nargs=* TNT NERDTreeTabsToggle
 
@@ -143,6 +145,12 @@ if has("autocmd")
         \ softtabstop=4
         \ shiftwidth=4
         \ filetype=c
+        \ noexpandtab
+  autocmd BufRead,BufNewFile *.java set
+        \ tabstop=8
+        \ softtabstop=4
+        \ shiftwidth=4
+        \ filetype=java
         \ noexpandtab
   autocmd FileType go set
         \ tabstop=8
