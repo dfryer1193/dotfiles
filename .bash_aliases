@@ -5,8 +5,10 @@
 
 if $(type exa &>/dev/null) ; then
   alias ls='exa -l --group-directories-first --color=always --git'
+  alias tree='exa -l --group-directories-first --color=always --git --tree'
 else
   alias ls='ls -lvh --group-directories-first --color=always'
+  alias tree='tree -C'
 fi
 alias less='less -Rr'
 alias clc='clear'
@@ -20,7 +22,6 @@ alias cd..='cd ..'
 alias pamcan='pacman'
 alias upgrade='sudo pacman -Syu; aurupgr'
 alias update='upgrade'
-alias tree='tree -C'
 alias noblank='xset s off -dpms; xset s noblank'
 alias sudo='sudo '
 alias spclient='ncmpcpp -p 6601'
@@ -40,3 +41,7 @@ fi
 alias gl='git log --graph --pretty=format:"%h - %d %s (%cr) <%an>" | vim -R \
   -c "set hidden nowrap keywordprg=:enew\ \|\ terminal\ \git\ --no-pager\ show |
   nnoremap q :bd!<cr>" -'
+alias pacnews='curl -s https://www.archlinux.org/feeds/news/ |\
+  xmllint --xpath //item/title\ \|\ //item/pubDate /dev/stdin |\
+  sed -r -e "s:<title>([^<]*?)</title><pubDate>([^<]*?)</pubDate>:\2\t\1\n:g" |\
+  colout "^.*$" 002'
