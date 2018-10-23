@@ -17,9 +17,9 @@ Plug 'atweiden/vim-dragvisuals'
   Plug 'vim-scripts/vis'
 
 " Themes
-Plug 'dikiaap/minimalist'
 Plug 'AlessandroYorba/Sierra'
-Plug 'jacoborus/tender.vim'
+Plug 'chriskempson/base16-vim'
+
 
 " Nonstandard syntax highlighting
 Plug 'mboughaba/i3config.vim'
@@ -71,12 +71,19 @@ nnoremap <C-Down> <C-w>j
 command! Please :execute ':w suda://%'
 
 " Theme
-colorscheme sierra
+set termguicolors
+colorscheme base16-default-dark
 " Force transparent bg
 hi Normal guibg=NONE ctermbg=NONE
 hi SignColumn guibg=NONE ctermbg=NONE
 hi EndOfBuffer guibg=NONE ctermbg=NONE
 hi LineNr guibg=NONE ctermbg=NONE
+
+" Gitgutter force transparent bg
+hi GitGutterAdd guibg=NONE ctermbg=NONE
+hi GitGutterChange guibg=NONE ctermbg=NONE
+hi GitGutterDelete guibg=NONE ctermbg=NONE
+hi GitGutterChangeDelete guibg=NONE ctermbg=NONE
 
 " Highlight merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
