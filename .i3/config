@@ -212,13 +212,13 @@ exec --no-startup-id exec nm-applet
 exec --no-startup-id exec blueman-applet
 exec_always ~/.screenlayout/default.sh
 exec_always allow_rgb10_configs=false compton -b
+exec_always termite -t scratchpad -e "tmux new-session -s SCRATCH"
+exec udiskie -s
 exec start-pulseaudio-x11
 exec albert
 exec mpd
 exec mopidy
 exec dropbox
-exec udiskie -s
-exec_always termite -t scratchpad -e "tmux new-session -s SCRATCH"
 
 # Window Modifications
 
