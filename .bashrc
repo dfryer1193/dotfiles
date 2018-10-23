@@ -21,9 +21,10 @@ else
   export EDITOR=vim visudo
 fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
-export GOPATH="$HOME/workspace/.go"
+export GOPATH="$HOME/go"
 export PATH="$HOME/scripts:$HOME/.bin:$GOPATH/bin:$PATH"
 export GIT_FETCH_REMOTE_INFO=true
+export BAT_THEME="1337"
 
 #export TERM=xterm-256color
 
