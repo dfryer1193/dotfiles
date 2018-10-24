@@ -11,15 +11,16 @@ Plug 'airblade/vim-gitgutter'
 
 " Various utilities
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
 Plug 'atweiden/vim-dragvisuals'
   Plug 'vim-scripts/Align'
   Plug 'vim-scripts/cecutil'
   Plug 'vim-scripts/vis'
+Plug 'jiangmiao/auto-pairs'
 
 " Themes
 Plug 'AlessandroYorba/Sierra'
 Plug 'chriskempson/base16-vim'
-
 
 " Nonstandard syntax highlighting
 Plug 'mboughaba/i3config.vim'
