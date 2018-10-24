@@ -4,7 +4,6 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 " UI Changes
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 
 " Version Control Info
 Plug 'airblade/vim-gitgutter'
@@ -17,10 +16,6 @@ Plug 'atweiden/vim-dragvisuals'
   Plug 'vim-scripts/cecutil'
   Plug 'vim-scripts/vis'
 Plug 'jiangmiao/auto-pairs'
-
-" Themes
-Plug 'AlessandroYorba/Sierra'
-Plug 'chriskempson/base16-vim'
 
 " Nonstandard syntax highlighting
 Plug 'mboughaba/i3config.vim'
@@ -73,18 +68,7 @@ command! Please :execute ':w suda://%'
 
 " Theme
 set termguicolors
-colorscheme base16-default-dark
-" Force transparent bg
-hi Normal guibg=NONE ctermbg=NONE
-hi SignColumn guibg=NONE ctermbg=NONE
-hi EndOfBuffer guibg=NONE ctermbg=NONE
-hi LineNr guibg=NONE ctermbg=NONE
-
-" Gitgutter force transparent bg
-hi GitGutterAdd guibg=NONE ctermbg=NONE
-hi GitGutterChange guibg=NONE ctermbg=NONE
-hi GitGutterDelete guibg=NONE ctermbg=NONE
-hi GitGutterChangeDelete guibg=NONE ctermbg=NONE
+colorscheme dfryer
 
 " Highlight merge conflict markers
 match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
@@ -100,7 +84,7 @@ nnoremap <silent> [c ?\v^(\<\|\=\|\>){7}([^=].+)\?$<CR>
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 let g:airline#extensions#tabline#enabled=1
 let g:airline_powerline_fonts=1
-let g:airline_theme='distinguished'
+let g:airline_theme='dfryer_airline'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""'
