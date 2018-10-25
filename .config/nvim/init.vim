@@ -43,7 +43,7 @@ set textwidth=80
 set formatoptions=tcrqn2blj
 set splitbelow
 set splitright
-"set listchars=eol:\,tab:>\ ,trail:~
+set listchars=tab:>-,trail:~,nbsp:%
 
 filetype plugin on
 syntax on
