@@ -94,3 +94,9 @@ highlight VertSplit guifg=#666666 guibg=#222222 gui=NONE ctermfg=008 ctermbg=000
 highlight LineNr guifg=#666666 guibg=NONE gui=NONE ctermfg=008 ctermbg=NONE cterm=NONE
 highlight NonText guifg=#666666 guibg=NONE gui=NONE ctermfg=008 ctermbg=NONE cterm=NONE
 highlight SpecialKey guifg=#666666 guibg=NONE gui=NONE ctermfg=008 ctermbg=NONE cterm=NONE
+
+"GIT COMMIT UI
+highlight gitcommitSummary guifg=#fea63c guibg=NONE gui=NONE ctermfg=003 ctermbg=NONE cterm=NONE
+highlight diffAdded guifg=#b7ce42 guibg=NONE gui=NONE ctermfg=002 ctermbg=NONE cterm=NONE
+highlight diffRemoved guifg=#e84f4f guibg=NONE gui=NONE ctermfg=001 ctermbg=NONE cterm=NONE
+highlight diffLine guifg=#66aabb guibg=NONE gui=NONE ctermfg=004 ctermbg=NONE cterm=NONE
