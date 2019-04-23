@@ -2,6 +2,9 @@ set nocompatible
 
 call plug#begin('~/.local/share/nvim/plugged')
 
+" Linting
+Plug 'w0rp/ale'
+
 " UI Changes
 Plug 'vim-airline/vim-airline'
 
@@ -16,12 +19,19 @@ Plug 'atweiden/vim-dragvisuals'
   Plug 'vim-scripts/cecutil'
   Plug 'vim-scripts/vis'
 Plug 'jiangmiao/auto-pairs'
+Plug 'lambdalisue/suda.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'dhruvasagar/vim-table-mode'
+
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Nonstandard syntax highlighting
 Plug 'mboughaba/i3config.vim'
 
 " Nonstandard Language support
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'zchee/deoplete-go', { 'do': 'make' }
 
 call plug#end()
 
@@ -49,7 +59,11 @@ filetype plugin on
 syntax on
 filetype indent on
 
+xmap ga <Plug>(EasyAlign)
+
 vmap Q gq
+
+nmap ga <Plug>(EasyAlign)
 nmap Q gqap
 nmap <F3> :set list!<CR>
 
@@ -77,7 +91,17 @@ match Todo '\v^(\<|\=|\>){7}([^=].+)?$'
 nnoremap <silent> ]c /\v^(\<\|\=\|\>){7}([^=].+)?$<CR>
 nnoremap <silent> [c ?\v^(\<\|\=\|\>){7}([^=].+)\?$<CR>
 
+" Better Tags
+map <A-]> :vsplit <CR>:exec("tag ".expand("<cword>"))<CR>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" vim-airline options                                                        ""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:deoplete#enable_at_startup=1
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "" vim-airline options                                                        ""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -118,6 +142,31 @@ function! SynGroup()
     echo synIDattr(l:s, 'name') . ' -> ' . synIDattr(synIDtrans(l:s), 'name')
 endfunc
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" vim-go settings                                                            ""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:go_auto_sameids = 1
+let g:go_fmt_command = "goimports"
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" ale linting options                                                        ""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_sign_error = 'X'
+let g:ale_sign_warning = '!'
+let g:airline#extensions#ale#enabled = 1
+
 " Filetype-specific stuff
 if has("autocmd")
   autocmd FileType make set
@@ -129,8 +178,8 @@ if has("autocmd")
         \ tabstop=4
         \ softtabstop=4
         \ shiftwidth=4
-        \ filetype=c
         \ noexpandtab
+        \ filetype=c
   autocmd BufRead,BufNewFile *.java set
         \ tabstop=8
         \ softtabstop=4
@@ -138,9 +187,9 @@ if has("autocmd")
         \ filetype=java
         \ noexpandtab
   autocmd FileType go set
-        \ tabstop=8
-        \ shiftwidth=8
-        \ softtabstop=0
+        \ tabstop=4
+        \ shiftwidth=4
+        \ softtabstop=4
         \ noexpandtab
   autocmd BufNewFile,BufReadPost *.md set
         \ filetype=markdown.pandoc
