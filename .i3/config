@@ -216,9 +216,6 @@ exec_always termite -t scratchpad -e "tmux new-session -s SCRATCH"
 exec udiskie -s
 exec start-pulseaudio-x11
 exec albert
-exec mpd
-exec mopidy
-exec dropbox
 
 # Window Modifications
 
