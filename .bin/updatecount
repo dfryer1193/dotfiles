@@ -1,6 +1,10 @@
 #!/bin/bash
 
-updateStr=$(checkupdates)
+if type -P yay &> /dev/null ; then
+  updateStr=$(~/.bin/yayupdates)
+else
+  updateStr=$(checkupdates)
+fi
 
 hasLinux=$(grep "linux" <<< ${updateStr})
 updates=$(wc -l <<< ${updateStr})
