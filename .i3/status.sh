@@ -15,7 +15,7 @@ WHITE="#dddddd"
 # count, for not doing things every second
 # resetTime, time when count resets
 count=0
-resetTime=$(( 4 * 3600 ))
+resetTime=$(( 1 * 3600 ))
 updatecount=$(~/.bin/updatecount)
 
 process_json() {
