@@ -20,7 +20,11 @@ alias aurupgr='aurget -Syu --deps --noedit --noconfirm'
 alias ksp='$STEAM/Kerbal\ Space\ Program/KSP.x86_64'
 alias cd..='cd ..'
 alias pamcan='pacman'
-alias upgrade='sudo pacman -Syu; aurupgr'
+if $(type yay &>/dev/null) ; then
+  alias upgrade='yay -Syu --noconfirm'
+else
+  alias upgrade='sudo pacman -Syu; aurupgr'
+fi
 alias update='upgrade'
 alias noblank='xset s off -dpms; xset s noblank'
 alias sudo='sudo '
@@ -32,6 +36,7 @@ alias dd='dd status=progress'
 alias kc='kubectl'
 if $(type nvim &>/dev/null) ; then
   alias vim='nvim'
+  alias vimdiff='nvim -d'
 fi
 
 if $(type bat &>/dev/null) ; then
