@@ -2,7 +2,7 @@
 
 notify-send DUNST_COMMAND_PAUSE
 
-i3lock -B=15 \
+i3lock -B 10 \
    -k \
    -n \
   --insidevercolor=dddddd55 \
