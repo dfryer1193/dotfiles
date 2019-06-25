@@ -23,6 +23,7 @@ Plug 'lambdalisue/suda.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'dhruvasagar/vim-table-mode'
+Plug 'vimwiki/vimwiki'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -124,6 +125,14 @@ vmap  <expr> <C-Left> DVB_Drag('left')
 vmap  <expr> <C-Right> DVB_Drag('right')
 vmap  <expr> <C-Down> DVB_Drag('down')
 vmap  <expr> <C-Up> DVB_Drag('up')
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"" Vimwiki Settings                                                           ""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vimwiki_list = [{'path':'~/vimwiki/','syntax':'markdown','ext':'.md'}]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
