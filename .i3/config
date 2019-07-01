@@ -138,7 +138,7 @@ bar {
     # set primary monitor with xrandr --output <output> --primary
     tray_output primary
     
-    font pango:InputMono Nerd Font Bold 10
+    font pango:iA Writer Mono S Bold 10
  
     colors {
         background #16161699
