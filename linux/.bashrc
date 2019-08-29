@@ -141,19 +141,6 @@ set_prompt(){
     #last_cmd_stat=$wrong
   fi
 
-  # todo.sh stuff
-  if $(type todo.sh &>/dev/null); then
-    numtasks=$(wc -l ~/.todo/todo.txt | grep -oE "[0-9]{1,}")
-    if [[ ! -z ${numtasks} ]]; then
-      PS1=$PS1"$color[$textcolor$numtasks"
-    fi
-    todo_has_changes=$(git -C ~/.todo status --porcelain)
-    if [[ ! -z "${todo_has_changes}" ]]; then
-      PS1=$PS1"$RED_BOLD!"
-    fi
-    PS1=$PS1"$color]$RESET_COLOR"
-  fi
-
   # current dir
   PS1=$PS1"$color[$textcolor\w"
   PS1=$PS1"$color]$RESET_COLOR"
