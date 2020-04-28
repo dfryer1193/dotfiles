@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if (( $# != 2 ))
+then
+  echo "Dependencies: brew install markdown htmldoc"
+  echo "Usage: md2pdf <input.md> <output.pdf>"
+  exit 1
+fi
+markdown $1 | htmldoc --cont --headfootsize 8.0 --linkcolor blue --linkstyle plain --format pdf14 - > $2
