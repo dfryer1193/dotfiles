@@ -80,6 +80,7 @@ nnoremap <C-Up> <C-w>k
 nnoremap <C-Down> <C-w>j
 
 command! Please :execute ':w suda://%'
+command! Json :execute '%!python -m json.tool'
 
 " Theme
 set termguicolors
