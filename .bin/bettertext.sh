@@ -5,17 +5,17 @@
 #
 
 function setclip {
-  xclip -selection c
+  xclip -sel c
 }
 
 function getclip {
-  xclip -selection clipboard -o
+  xclip -sel c -o
 }
 
 file=$(mktemp)
-termite -t vimedit -e "nvim '${file}'"
+alacritty -t vimedit -e nvim ${file}
 
 cat ${file} | setclip
-#rm ${file}
+rm ${file}
 
 xdotool key ctrl+v
