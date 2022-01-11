@@ -28,35 +28,15 @@ git config --global core.excludesfile ~/.gitignore
 makelink .bashrc
 makelink .bash_aliases
 makelink .bash_colors
-makelink .vimrc
-makelink .Xdefaults
 makelink .tmux.conf
-makelink .i3blocks.conf
-makelink .i3status.conf
-makelink .vim/autoload/airline/themes/murmur_modified.vim
-makelink .todo.cfg
-makelink .cliconkyrc
+makelink .zshrc
+makelink .zshenv
+makelink .zsh_aliases
 
 for file in .config/*; do
   makelink $file
 done
 
 for file in .bin/*; do
-  makelink $file
-done
-
-for file in .i3/*; do
-  makelink $file
-done
-
-for file in .ncmpcpp/*; do
-  makelink $file
-done
-
-for file in .todo.actions.d/*; do
-  makelink $file
-done
-
-for file in .weechat/*; do
   makelink $file
 done
