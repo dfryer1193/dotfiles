@@ -32,6 +32,7 @@ set $ws20 "20"
 
 font pango:Meslo LG S DZ for Powerline 10
 
+exec --no-startup-id xss-lock ~/.bin/screenlock.sh
 exec_always feh --bg-fill ~/.wallpaper.png
 
 floating_modifier $mod
