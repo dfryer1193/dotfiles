@@ -1,24 +1,24 @@
 #!/bin/bash
 
-notify-send DUNST_COMMAND_PAUSE
+dunstctl set-paused true
 
 i3lock -B 10 \
    -k \
    -n \
-  --insidevercolor=dddddd55 \
-  --insidewrongcolor=e84f4f55 \
-  --insidecolor=66666655 \
-  --ringvercolor=ccccccff \
-  --ringwrongcolor=d23d3dff \
-  --ringcolor=222222ff \
+  --insidever-color=dddddd55 \
+  --insidewrong-color=e84f4f55 \
+  --inside-color=66666655 \
+  --ringver-color=ccccccff \
+  --ringwrong-color=d23d3dff \
+  --ring-color=222222ff \
   --line-uses-inside \
-  --keyhlcolor=dddddd22 \
-  --bshlcolor=e84f4f22 \
-  --timestr="%H:%M:%S" \
-  --timepos="x+w-(1.5*r):y+h-(0.5*r)" \
-  --timecolor=ccccccff \
+  --keyhl-color=dddddd22 \
+  --bshl-color=e84f4f22 \
+  --time-str="%H:%M:%S" \
+  --time-pos="x+w-(1.5*r):y+h-(0.5*r)" \
+  --time-color=ccccccff \
   --time-font=monospace \
-  --timesize=25 \
-  --datestr=""
+  --time-size=25 \
+  --date-str=""
 
-notify-send DUNST_COMMAND_RESUME
+dunstctl set-paused false
