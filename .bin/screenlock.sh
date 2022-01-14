@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DUNST_STATE=$(dunstctl is-paused)
+
 dunstctl set-paused true
 
 i3lock -B 10 \
@@ -21,4 +23,4 @@ i3lock -B 10 \
   --time-size=25 \
   --date-str=""
 
-dunstctl set-paused false
+dunstctl set-paused $DUNST_STATE
