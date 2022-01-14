@@ -1,8 +1,15 @@
 [core]
-    excludesfile = /home/dfryer/.gitignore
+  excludesfile = /home/dfryer/.gitignore
 [color]
-    diff = auto
-    ui = auto
+  diff = auto
+  ui = auto
 [alias]
-    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
-    ls = log --oneline
+  lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative
+  ls = log --oneline
+  cmt = commit -v
+  branch-name = "!git rev-parse --abbrev-ref HEAD"
+  fpush = push --force-with-lease
+  pushb = "!git push -u origin $(git branch-name)"
+[user]
+  email = dfryer1193@gmail.com
+  name = David Fryer

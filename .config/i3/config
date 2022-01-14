@@ -32,14 +32,14 @@ set $ws20 "20"
 
 font pango:Meslo LG S DZ for Powerline 10
 
+exec --no-startup-id xss-lock ~/.bin/screenlock.sh
 exec_always feh --bg-fill ~/.wallpaper.png
 
 floating_modifier $mod
 
 bindsym $mod+Shift+q kill
 
-bindsym $mod+Return exec termite
-bindsym $mod+d exec dmenu_run -i -f -l 70 -w 200 -o 0.8 -nb "$background" -nf "$secondary" -sb "$secondary" -sf "$background" -fn "-*-terminesspowerline-*-*-*-*-12-*-*-*-*-*-*-*"
+bindsym $mod+Return exec alacritty
 
 bindsym $mod+j focus left
 bindsym $mod+k focus down
@@ -131,7 +131,7 @@ gaps outer 7
 # finds out, if available)
 bar {
     i3bar_command i3bar -t
-    status_command ~/.i3/status
+    status_command ~/.config/i3/status
 
     position          top
     workspace_buttons yes
@@ -194,6 +194,10 @@ bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
 bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
+bindsym $win+period   exec --no-startup-id playerctl next
+bindsym $win+comma    exec --no-startup-id playerctl previous
+
+bindcode $mod+133 exec dunstctl set-paused toggle
 
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
@@ -206,14 +210,14 @@ bindsym $mod+i exec --no-startup-id ~/.bin/bettertext.sh
 bindsym $win+L exec ~/.bin/screenlock.sh
 bindsym $mod+Control+L exec ~/.bin/screenlock.sh
 
+bindsym $win+space exec "rofi -modi drun,run -show drun"
+
 exec --no-startup-id exec nm-applet
 exec --no-startup-id exec blueman-applet
 exec_always ~/.screenlayout/default.sh
 exec_always allow_rgb10_configs=false compton -b
-exec_always termite -t scratchpad -e "tmux new-session -s SCRATCH"
+exec_always alacritty -t scratchpad -e tmux new-session -s SCRATCH
 exec udiskie -s
-exec start-pulseaudio-x11
-exec albert
 
 # Window Modifications
 
