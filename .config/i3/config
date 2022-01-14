@@ -197,6 +197,8 @@ bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym $win+period   exec --no-startup-id playerctl next
 bindsym $win+comma    exec --no-startup-id playerctl previous
 
+bindcode $mod+133 exec dunstctl set-paused toggle
+
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
 
