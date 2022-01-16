@@ -131,7 +131,7 @@ gaps outer 7
 # finds out, if available)
 bar {
     i3bar_command i3bar -t
-    status_command ~/.config/i3/status
+    status_command gobar
 
     position          top
     workspace_buttons yes
