@@ -21,6 +21,7 @@ else
   export EDITOR=vim visudo
 fi
 export STEAM=$HOME/.local/share/Steam/SteamApps/common
+export STEAMAPPS=/home/steam/steamapps
 export GOPATH="$HOME/go"
 export PATH="$HOME/scripts:$HOME/.bin:$GOPATH/bin:$PATH"
 export GIT_FETCH_REMOTE_INFO=true

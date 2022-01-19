@@ -129,7 +129,7 @@ gaps outer 7
 # finds out, if available)
 bar {
     i3bar_command i3bar -t
-    status_command gobar
+    status_command ~/go/bin/gobar
 
     position          top
     workspace_buttons yes
@@ -212,10 +212,13 @@ bindsym $win+space exec "rofi -modi drun,run -show drun"
 
 exec --no-startup-id exec nm-applet
 exec --no-startup-id exec blueman-applet
+exec --no-startup-id exec lxsession
 exec_always ~/.screenlayout/default.sh
 exec_always allow_rgb10_configs=false compton -b
 exec_always alacritty -t scratchpad -e tmux new-session -s SCRATCH
 exec udiskie -s
+exec albert
+exec barrier
 
 # Window Modifications
 
@@ -229,5 +232,6 @@ for_window [title="^DISK$"] floating enable
 for_window [title="^PACKAGES$"] floating enable
 for_window [title="^TEMPERATURE$"] floating enable
 for_window [title="^DATE$"] floating enable
+for_window [instance="origin.exe"] floating enable
 
 for_window [class="^.*"] border pixel 0

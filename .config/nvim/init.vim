@@ -30,6 +30,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'dhruvasagar/vim-table-mode'
 Plug 'vimwiki/vimwiki'
+Plug 'preservim/nerdtree'
 
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
@@ -40,6 +41,7 @@ Plug 'mboughaba/i3config.vim'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'zchee/deoplete-go', { 'do': 'make' }
 
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 set tabstop=2
