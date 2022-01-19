@@ -1,5 +1,5 @@
 [core]
-  excludesfile = /home/dfryer/.gitignore
+	excludesfile = /home/dfryer/.gitignore
 [color]
   diff = auto
   ui = auto
