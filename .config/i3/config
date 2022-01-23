@@ -229,9 +229,14 @@ for_window [title="^vimedit$"] resize set 800 600
 for_window [title="^vimedit$"] sticky enable
 
 for_window [title="^DISK$"] floating enable
+for_window [title="^DISK$"] sticky enable
 for_window [title="^PACKAGES$"] floating enable
+for_window [title="^PACKAGES$"] sticky enable
 for_window [title="^TEMPERATURE$"] floating enable
+for_window [title="^TEMPERATURE$"] sticky enable
 for_window [title="^DATE$"] floating enable
+for_window [title="^DATE$"] sticky enable
+
 for_window [instance="origin.exe"] floating enable
 
 for_window [class="^.*"] border pixel 0
