@@ -30,7 +30,7 @@ set $ws18 "18"
 set $ws19 "19"
 set $ws20 "20"
 
-font pango:Meslo LG S DZ for Powerline 10
+font pango:JetBrainsMono Nerd Font 10
 
 exec --no-startup-id xss-lock ~/.bin/screenlock.sh
 exec_always feh --bg-fill ~/.wallpaper.png
@@ -129,7 +129,7 @@ gaps outer 7
 # finds out, if available)
 bar {
     i3bar_command i3bar -t
-    status_command ~/go/bin/gobar
+    status_command gobar
 
     position          top
     workspace_buttons yes
@@ -213,6 +213,7 @@ bindsym $win+space exec "rofi -modi drun,run -show drun"
 exec --no-startup-id exec nm-applet
 exec --no-startup-id exec blueman-applet
 exec --no-startup-id exec lxsession
+exec --no-startup-id exec libinput-gestures
 exec_always ~/.screenlayout/default.sh
 exec_always allow_rgb10_configs=false compton -b
 exec_always alacritty -t scratchpad -e tmux new-session -s SCRATCH
@@ -228,6 +229,8 @@ for_window [title="^vimedit$"] floating enable
 for_window [title="^vimedit$"] resize set 800 600
 for_window [title="^vimedit$"] sticky enable
 
+for_window [title="^WEATHER$"] floating enable
+for_window [title="^WEATHER$"] sticky enable
 for_window [title="^DISK$"] floating enable
 for_window [title="^DISK$"] sticky enable
 for_window [title="^PACKAGES$"] floating enable
