@@ -239,6 +239,8 @@ for_window [title="^TEMPERATURE$"] floating enable
 for_window [title="^TEMPERATURE$"] sticky enable
 for_window [title="^DATE$"] floating enable
 for_window [title="^DATE$"] sticky enable
+for_window [title="^NETWORK$"] floating enable
+for_window [title="^NETWORK$"] sticky enable
 
 for_window [instance="origin.exe"] floating enable
 
