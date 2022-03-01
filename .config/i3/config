@@ -213,7 +213,7 @@ bindsym $win+space exec "rofi -modi drun,run -show drun"
 exec --no-startup-id exec nm-applet
 exec --no-startup-id exec blueman-applet
 exec --no-startup-id exec lxsession
-exec --no-startup-id exec libinput-gestures
+exec_always libinput-gestures
 exec_always ~/.screenlayout/default.sh
 exec_always allow_rgb10_configs=false compton -b
 exec_always alacritty -t scratchpad -e tmux new-session -s SCRATCH
