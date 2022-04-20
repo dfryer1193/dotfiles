@@ -1,8 +1,8 @@
 #!/bin/bash
 
-boldYellow='\e[1;33m'
-boldGrn='\e[1;32m'
-reset='\e[0m'
+boldYellow='\033[1;33m'
+boldGrn='\033[1;32m'
+reset='\033[0m'
 
 create_msg() { echo -e "[ ${boldGrn}CREATE${reset} ] $@"; }
 
