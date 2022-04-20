@@ -13,3 +13,5 @@
 [user]
   email = dfryer1193@gmail.com
   name = David Fryer
+[init]
+	defaultBranch = main
