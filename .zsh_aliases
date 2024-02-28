@@ -17,7 +17,13 @@ else
 fi
 alias gti='git'
 alias clc='clear'
-alias upgrade='brew update && brew upgrade && brew upgrade --cask $(brew list --cask)'
+if $(type brew &>/dev/null) ; then
+  alias upgrade='brew update && brew upgrade && brew upgrade --cask $(brew list --cask)'
+elif $(type yay &>/dev/null) ; then
+  alias upgrade='yay -Syu --noconfirm'
+else
+  alias upgrade='sudo pacman -Syu'
+fi
 alias update='upgrade'
 alias noblank='xset s off -dpms; xset s noblank'
 alias dd='dd status=progress'
@@ -34,3 +40,4 @@ else
   alias vw='vimwiki'
 fi
 alias mvn='if [[ -e .git && ! -v $GIT_REPO ]] then export GIT_REPO=$(cd ..; basename $(pwd)); fi; mvn'
+alias less='less -SR'
