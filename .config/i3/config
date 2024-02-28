@@ -215,11 +215,10 @@ exec --no-startup-id exec blueman-applet
 exec --no-startup-id exec lxsession
 exec_always libinput-gestures
 exec_always ~/.screenlayout/default.sh
-exec_always allow_rgb10_configs=false compton -b
 exec_always alacritty -t scratchpad -e tmux new-session -s SCRATCH
+exec picom -b
 exec udiskie -s
 exec albert
-exec barrier
 
 # Window Modifications
 
