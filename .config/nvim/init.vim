@@ -141,7 +141,11 @@ vmap  <expr> <C-Up> DVB_Drag('up')
 "" Vimwiki Settings                                                           ""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vimwiki_list = [{'path':'~/vimwiki/','syntax':'markdown','ext':'.md'}]
+let g:vimwiki_list = [{'path':'~/vimwiki/',
+      \ 'path_html': '~/vimwiki/html/',
+      \ 'syntax':'markdown',
+      \ 'ext':'.md',
+      \ 'custom_wiki2html':'~/.bin/wiki2html.sh'}]
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -210,6 +214,8 @@ if has("autocmd")
         \ softtabstop=4
         \ noexpandtab
   autocmd BufNewFile,BufReadPost *.md set
+        \ nowrap
+        \ fo-=t
         \ filetype=markdown.pandoc
   autocmd BufRead,BufNewFile *i3/config set
         \ filetype=i3config
