@@ -69,7 +69,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+space focus mode_toggle
 bindsym $mod+Shift+space floating toggle
 
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 #bindsym $mod+d focus child
 
 bindsym $mod+1 workspace $ws1
