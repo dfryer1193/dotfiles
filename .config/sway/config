@@ -1,0 +1,230 @@
+include monitor.swayconfig
+include blur.swayconfig
+
+exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+
+set $mod Mod1
+set $win Mod4
+
+set $background #161616
+set $foreground #ffffff
+set $gray       #222222
+set $primary    #dddddd
+set $secondary  #666666
+set $tertiary   #222222
+set $warning    #e84f4f
+
+set $ws1  "1"
+set $ws2  "2"
+set $ws3  "3"
+set $ws4  "4"
+set $ws5  "5"
+set $ws6  "6"
+set $ws7  "7"
+set $ws8  "8"
+set $ws9  "9"
+set $ws10 "10"
+set $ws11 "11"
+set $ws12 "12"
+set $ws13 "13"
+set $ws14 "14"
+set $ws15 "15"
+set $ws16 "16"
+set $ws17 "17"
+set $ws18 "18"
+set $ws19 "19"
+set $ws20 "20"
+
+font pango:JetBrainsMono Nerd Font 10
+
+exec swayidle -w timeout 1800 'systemctl suspend-then-hibernate'
+exec_always swaybg -i ~/.wallpaper.png
+exec_always dunst
+
+floating_modifier $mod
+
+bindsym $mod+Shift+q kill
+
+bindsym $mod+Return exec alacritty
+
+bindsym $mod+j focus left
+bindsym $mod+k focus down
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+j move left
+bindsym $mod+Shift+k move down
+bindsym $mod+Shift+l move up
+bindsym $mod+Shift+h move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+h split h
+bindsym $mod+v split v
+
+bindsym $mod+f fullscreen
+bindsym $mod+Shift+f fullscreen global
+
+bindsym $mod+e layout toggle split
+
+bindsym $mod+space focus mode_toggle
+bindsym $mod+Shift+space floating toggle
+
+#bindsym $mod+a focus parent
+#bindsym $mod+d focus child
+
+workspace $ws1 output DP-1
+workspace $ws2 output DP-3
+workspace $ws3 output DP-2
+
+bindsym $mod+1 workspace $ws1
+bindsym $mod+2 workspace $ws2
+bindsym $mod+3 workspace $ws3
+bindsym $mod+4 workspace $ws4
+bindsym $mod+5 workspace $ws5
+bindsym $mod+6 workspace $ws6
+bindsym $mod+7 workspace $ws7
+bindsym $mod+8 workspace $ws8
+bindsym $mod+9 workspace $ws9
+bindsym $mod+0 workspace $ws10
+bindsym $mod+Control+1 workspace $ws11
+bindsym $mod+Control+2 workspace $ws12
+bindsym $mod+Control+3 workspace $ws13
+bindsym $mod+Control+4 workspace $ws14
+bindsym $mod+Control+5 workspace $ws15
+bindsym $mod+Control+6 workspace $ws16
+bindsym $mod+Control+7 workspace $ws17
+bindsym $mod+Control+8 workspace $ws18
+bindsym $mod+Control+9 workspace $ws19
+bindsym $mod+Control+0 workspace $ws20
+bindsym $mod+Tab workspace back_and_forth
+
+workspace_auto_back_and_forth yes
+
+bindsym $mod+Control+Shift+Left move window to workspace prev
+bindsym $mod+Control+Shift+Right move window to workspace next
+
+bindsym $mod+Control+Shift+Prior move container to output left
+bindsym $mod+Control+Shift+Next move container to output right
+
+bindsym $mod+Shift+1 move container to workspace number $ws1
+bindsym $mod+Shift+2 move container to workspace number $ws2
+bindsym $mod+Shift+3 move container to workspace number $ws3
+bindsym $mod+Shift+4 move container to workspace number $ws4
+bindsym $mod+Shift+5 move container to workspace number $ws5
+bindsym $mod+Shift+6 move container to workspace number $ws6
+bindsym $mod+Shift+7 move container to workspace number $ws7
+bindsym $mod+Shift+8 move container to workspace number $ws8
+bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+0 move container to workspace number $ws10
+
+bindsym $mod+Shift+period move workspace to output right
+bindsym $mod+Shift+comma move workspace to output left
+
+# colors                BORDER      BACKGROUND TEXT        INDICATOR
+client.focused          $primary    $primary   $background $primary
+client.focused_inactive $background $primary   $foreground $background
+client.unfocused        $gray       $gray      $background $secondary
+client.urgent           $warning    $warning   $foreground $warning
+
+gaps inner 7
+gaps outer 7
+
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [instance="float"] floating enable
+
+bindsym $mod+Shift+r reload
+
+mode "resize" {
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        bindsym Left resize shrink width 2 px or 2 ppt
+        bindsym Down resize grow height 2 px or 2 ppt
+        bindsym Up resize shrink height 2 px or 2 ppt
+        bindsym Right resize grow width 2 px or 2 ppt
+
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bindsym $mod+shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+## My Alterations
+bindsym $mod+F12 exec amixer set Master 5%+
+bindsym $mod+F11 exec amixer set Master 5%-
+bindsym $mod+F10 exec amixer set Master toggle
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id amixer set Master 5%+
+bindsym XF86AudioLowerVolume exec --no-startup-id amixer set Master 5%-
+bindsym XF86AudioMute exec --no-startup-id amixer set Master toggle
+
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
+bindsym XF86AudioStop exec --no-startup-id playerctl stop
+bindsym $win+period   exec --no-startup-id playerctl next
+bindsym $win+comma    exec --no-startup-id playerctl previous
+
+bindcode $mod+133 exec dunstctl set-paused toggle
+
+bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
+bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+
+bindsym $mod+Shift+P sticky toggle
+bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable;
+
+bindsym $mod+i exec --no-startup-id ~/.bin/bettertext.sh
+
+bindsym $win+L exec ~/.bin/screenlock.sh
+bindsym $mod+Control+L exec ~/.bin/screenlock.sh
+
+bindsym $win+space exec "tofi-drun --drun-launch=true"
+bindsym $win+Return exec "grimshot --notify save active $HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d.%H-%M-%S).png"
+bindsym $win+Control+Return exec "grimshot --notify save area $HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d.%H-%M-%S).png"
+
+exec nm-applet
+exec blueman-applet
+exec lxsession
+exec libinput-gestures
+#exec_always allow_rgb10_configs=false compton -b
+exec_always alacritty -t scratchpad -e tmux new-session -s SCRATCH
+exec udiskie -s
+exec waybar
+
+# Window Modifications
+
+for_window [title="^scratchpad$"] move scratchpad
+
+for_window [title="^vimedit$"] floating enable
+for_window [title="^vimedit$"] resize set 800 600
+for_window [title="^vimedit$"] sticky enable
+
+for_window [title="^WEATHER$"] floating enable
+for_window [title="^WEATHER$"] sticky enable
+for_window [title="^DISK$"] floating enable
+for_window [title="^DISK$"] sticky enable
+for_window [title="^PACKAGES$"] floating enable
+for_window [title="^PACKAGES$"] sticky enable
+for_window [title="^TEMPERATURE$"] floating enable
+for_window [title="^TEMPERATURE$"] sticky enable
+for_window [title="^DATE$"] floating enable
+for_window [title="^DATE$"] sticky enable
+
+for_window [instance="origin.exe"] floating enable
+
+for_window [class="^.*"] border pixel 0
