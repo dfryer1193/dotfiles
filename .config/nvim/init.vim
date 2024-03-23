@@ -35,7 +35,7 @@ Plug 'preservim/nerdtree'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 " Nonstandard syntax highlighting
-Plug 'mboughaba/i3config.vim'
+Plug 'ajouellette/sway-vim-syntax'
 
 " Nonstandard Language support
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -211,8 +211,8 @@ if has("autocmd")
         \ noexpandtab
   autocmd BufNewFile,BufReadPost *.md set
         \ filetype=markdown.pandoc
-  autocmd BufRead,BufNewFile *i3/config set
-        \ filetype=i3config
+        \ nowrap
+        \ fo-=t
   autocmd VimResized * :wincmd =
   autocmd! bufwritepost .vimrc source ~/.vimrc
 endif
