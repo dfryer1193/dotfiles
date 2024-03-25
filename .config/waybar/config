@@ -1,0 +1,103 @@
+{
+    "layer": "top",
+    "position": "top",
+    "spacing": 4,
+    "modules-left": ["sway/workspaces", "sway/scratchpad"],
+    "modules-center": ["sway/window"],
+    "modules-right": ["custom/weather", "custom/packages", "disk", "temperature", "memory", "pulseaudio", "custom/media", "clock", "network", "custom/audio_idle_inhibitor", "tray"],
+     "sway/workspaces": {
+         "disable-scroll": true,
+         "all-outputs": false,
+         "warp-on-scroll": false,
+         "format": "{name}: {icon}",
+         "format-icons": {
+             "urgent": "",
+             "focused": "",
+             "default": ""
+         }
+     },
+    "tray": {
+      "show-passive-items": true
+    },
+    "custom/weather": {
+        "interval": 3600,
+        "exec": "curl \"https://wttr.in/?format=%c%t\""
+    },
+    "disk": {
+        "format": "\uf0a0  {free}",
+        "path": "/"
+    },
+    "custom/packages": {
+        "interval": 3600,
+        "exec": "~/.bin/yayupdates | wc -l",
+        "format": "\uf077  {}"
+    },
+    "temperature": {
+        "hwmon-path": "/sys/class/hwmon/hwmon4/temp1_input",
+        "critical-threshold": 80,
+        "format-critical": "{icon} {temperatureC}°C",
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", ""]
+    },
+    "memory": {
+        "format": "\uf538 {percentage}%",
+        "tooltip-format": "{used}GiB / {avail}GiB"
+    },
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "amixer set Master toggle"
+    },
+    "custom/media": {
+        "format": "{icon} {}",
+        "return-type": "json",
+        "max-length": 25,
+        "format-icons": {
+            "spotify": "",
+            "default": "🎜"
+        },
+        "escape": true,
+        "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
+        "on-click": "playerctl play-pause",
+        "on-scroll-down": "playerctl next",
+        "on-scroll-up": "playerctl previous"
+    },
+    "clock": {
+        "timezone": "America/New_York",
+        "interval": 1,
+        "format": " {:%a %b %d %H.%M}"
+    },
+    "network": {
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-ethernet": "{bandwidthUpBytes} \uf6ff",
+        "tooltip-format": "{ifname} via {gwaddr} \uf6ff",
+        "format-linked": "{ifname} (No IP) \uf6ff",
+        "format-disconnected": "Disconnected ⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "custom/audio_idle_inhibitor": {
+		"format": "{icon}",
+		"exec": "sway-audio-idle-inhibit --dry-print-both-waybar",
+		"exec-if": "which sway-audio-idle-inhibit",
+		"return-type": "json",
+		"format-icons": {
+			"output": " ",
+			"input": " ",
+			"output-input": "   ",
+			"none": ""
+		}
+	}
+}
+
