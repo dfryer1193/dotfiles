@@ -41,3 +41,4 @@ else
 fi
 alias mvn='if [[ -e .git && ! -v $GIT_REPO ]] then export GIT_REPO=$(cd ..; basename $(pwd)); fi; mvn'
 alias less='less -SR'
+alias kc='kubectl'
