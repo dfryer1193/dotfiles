@@ -12,3 +12,4 @@ fi
 export GOPATH="$HOME/go"
 export PATH="$HOME/scripts:$HOME/.bin:$HOME/go/bin:$PATH:/opt/anaconda3/bin"
 export GIT_FETCH_REMOTE_INFO=true
+export KUBECONFIG=~/.kube/config

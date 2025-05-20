@@ -36,3 +36,4 @@ else
   alias vimwiki='vim -c "VimwikiIndex"'
   alias vw='vimwiki'
 fi
+alias kc='kubectl'
