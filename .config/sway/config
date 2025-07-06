@@ -1,5 +1,6 @@
-include monitor.swayconfig
 include blur.swayconfig
+include .generated_settings/*.conf
+include "~/.config/sway/$(hostnamectl hostname)/*"
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
@@ -39,6 +40,7 @@ set $ws20 "20"
 
 font pango:JetBrainsMono Nerd Font 10
 
+exec --no-startup-id xss-lock ~/.bin/screenlock.sh
 exec swayidle -w timeout 1800 'systemctl suspend-then-hibernate'
 exec_always swaybg -i ~/.wallpaper.png
 exec_always dunst
@@ -80,10 +82,6 @@ bindsym $mod+Shift+space floating toggle
 
 #bindsym $mod+a focus parent
 #bindsym $mod+d focus child
-
-workspace $ws1 output DP-1
-workspace $ws2 output DP-3
-workspace $ws3 output DP-2
 
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
@@ -182,8 +180,8 @@ bindsym $win+comma    exec --no-startup-id playerctl previous
 
 bindcode $mod+133 exec dunstctl set-paused toggle
 
-bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 5
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 5
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl s +5%
+bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl s 5%-
 
 bindsym $mod+Shift+P sticky toggle
 bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky enable;
@@ -201,7 +199,6 @@ exec nm-applet
 exec blueman-applet
 exec lxsession
 exec libinput-gestures
-#exec_always allow_rgb10_configs=false compton -b
 exec_always alacritty -t scratchpad -e tmux new-session -s SCRATCH
 exec udiskie -s
 exec waybar
