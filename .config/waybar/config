@@ -4,7 +4,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/scratchpad"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/weather", "custom/packages", "disk", "temperature", "memory", "pulseaudio", "custom/media", "clock", "network", "custom/audio_idle_inhibitor", "tray"],
+    "modules-right": ["custom/weather", "custom/packages", "disk", "temperature", "memory", "wireplumber", "clock", "network", "battery", "custom/audio_idle_inhibitor", "tray"],
      "sway/workspaces": {
          "disable-scroll": true,
          "all-outputs": false,
@@ -24,7 +24,7 @@
         "exec": "curl \"https://wttr.in/?format=%c%t\""
     },
     "disk": {
-        "format": "\uf0a0  {free}",
+        "format": "󰋊 {free}",
         "path": "/"
     },
     "custom/packages": {
@@ -40,8 +40,14 @@
         "format-icons": ["", "", ""]
     },
     "memory": {
-        "format": "\uf538 {percentage}%",
+        "format": " {percentage}%",
         "tooltip-format": "{used}GiB / {avail}GiB"
+    },
+    "wireplumber": {
+	"format": "{icon} {volume}%",
+	"format-muted": " MUTE",
+	"on-click": "amixer set Master toggle",
+        "format-icons": ["", "", ""]
     },
     "pulseaudio": {
         "scroll-step": 5,
@@ -61,12 +67,12 @@
         "on-click": "amixer set Master toggle"
     },
     "custom/media": {
-        "format": "{icon} {}",
+        "format": "{icon} {text}",
         "return-type": "json",
         "max-length": 25,
         "format-icons": {
             "spotify": "",
-            "default": "🎜"
+            "default": "󰝚"
         },
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null",
@@ -80,12 +86,19 @@
         "format": " {:%a %b %d %H.%M}"
     },
     "network": {
-        "format-wifi": "{essid} ({signalStrength}%) ",
+        "format-wifi": "{essid} ({signalStrength}%)  ",
         "format-ethernet": "{bandwidthUpBytes} \uf6ff",
         "tooltip-format": "{ifname} via {gwaddr} \uf6ff",
         "format-linked": "{ifname} (No IP) \uf6ff",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "battery": {
+	    "bat": "BAT0",
+	    "adapter": "AC",
+	    "format": "{icon} {capacity}%",
+	    "format-charging": "󰂄 {capacity}%",
+	    "format-icons": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰁹"]
     },
     "custom/audio_idle_inhibitor": {
 		"format": "{icon}",
