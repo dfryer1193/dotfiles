@@ -3,3 +3,5 @@
 .config/i3/status
 
 .idea/
+
+.config/sway/.generated_settings/
