@@ -2,3 +2,7 @@ output DP-2 mode 2560x1440@59951Hz pos 0 0 scale 1
 output DP-1 mode 2560x1440@59951Hz pos 2560 0 scale 1
 focus output DP-1
 output DP-3 mode 2560x1440@59951Hz pos 5120 0 scale 1
+
+workspace $ws1 output DP-1
+workspace $ws2 output DP-3
+workspace $ws3 output DP-2
