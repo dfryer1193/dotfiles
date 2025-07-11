@@ -21,6 +21,7 @@ alias ua-drop-caches='sudo paccache -rk3; yay -Sc --aur --noconfirm'
 if $(type brew &>/dev/null) ; then
   alias upgrade='brew update && brew upgrade && brew upgrade --cask $(brew list --cask)'
 elif $(type yay &>/dev/null) ; then
+  alias upgrade='yay -Syu --noconfirm'
   alias rupgrade='export TMPFILE="$(mktemp)"; \
     sudo true; \
     rate-mirrors --save=$TMPFILE arch --max-delay=21600 \
@@ -28,12 +29,12 @@ elif $(type yay &>/dev/null) ; then
     && sudo mv $TMPFILE /etc/pacman.d/mirrorlist \
     && ua-drop-caches \
     && yay -Syyu --noconfirm'
-  alias upgrade='yay -Syu --noconfirm'
 else
   alias upgrade='sudo pacman -Syu'
 fi
 alias rupdate='rupgrade'
 alias update='upgrade'
+alias rupdate='rupgrade'
 alias noblank='xset s off -dpms; xset s noblank'
 alias dd='dd status=progress'
 if $(type nvim &>/dev/null) ; then

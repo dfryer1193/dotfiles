@@ -1,10 +1,12 @@
 include blur.swayconfig
 include .generated_settings/*.conf
+include default.conf
 include "~/.config/sway/$(hostnamectl hostname)/*"
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
      dbus-update-activation-environment --systemd DISPLAY WAYLAND_DISPLAY SWAYSOCK
+exec dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP=sway
 
 set $mod Mod1
 set $win Mod4
@@ -16,27 +18,6 @@ set $primary    #dddddd
 set $secondary  #666666
 set $tertiary   #222222
 set $warning    #e84f4f
-
-set $ws1  "1"
-set $ws2  "2"
-set $ws3  "3"
-set $ws4  "4"
-set $ws5  "5"
-set $ws6  "6"
-set $ws7  "7"
-set $ws8  "8"
-set $ws9  "9"
-set $ws10 "10"
-set $ws11 "11"
-set $ws12 "12"
-set $ws13 "13"
-set $ws14 "14"
-set $ws15 "15"
-set $ws16 "16"
-set $ws17 "17"
-set $ws18 "18"
-set $ws19 "19"
-set $ws20 "20"
 
 font pango:JetBrainsMono Nerd Font 10
 
@@ -113,16 +94,16 @@ bindsym $mod+Control+Shift+Right move window to workspace next
 bindsym $mod+Control+Shift+Prior move container to output left
 bindsym $mod+Control+Shift+Next move container to output right
 
-bindsym $mod+Shift+1 move container to workspace number $ws1
-bindsym $mod+Shift+2 move container to workspace number $ws2
-bindsym $mod+Shift+3 move container to workspace number $ws3
-bindsym $mod+Shift+4 move container to workspace number $ws4
-bindsym $mod+Shift+5 move container to workspace number $ws5
-bindsym $mod+Shift+6 move container to workspace number $ws6
-bindsym $mod+Shift+7 move container to workspace number $ws7
-bindsym $mod+Shift+8 move container to workspace number $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
-bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+1 move container to workspace $ws1
+bindsym $mod+Shift+2 move container to workspace $ws2
+bindsym $mod+Shift+3 move container to workspace $ws3
+bindsym $mod+Shift+4 move container to workspace $ws4
+bindsym $mod+Shift+5 move container to workspace $ws5
+bindsym $mod+Shift+6 move container to workspace $ws6
+bindsym $mod+Shift+7 move container to workspace $ws7
+bindsym $mod+Shift+8 move container to workspace $ws8
+bindsym $mod+Shift+9 move container to workspace $ws9
+bindsym $mod+Shift+0 move container to workspace $ws10
 
 bindsym $mod+Shift+period move workspace to output right
 bindsym $mod+Shift+comma move workspace to output left
@@ -204,7 +185,6 @@ exec udiskie -s
 exec waybar
 
 # Window Modifications
-
 for_window [title="^scratchpad$"] move scratchpad
 
 for_window [title="^vimedit$"] floating enable
