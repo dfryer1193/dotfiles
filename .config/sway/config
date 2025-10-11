@@ -22,7 +22,7 @@ set $warning    #e84f4f
 font pango:JetBrainsMono Nerd Font 10
 
 exec --no-startup-id xss-lock ~/.bin/screenlock.sh
-exec swayidle -w timeout 1800 'systemctl suspend-then-hibernate'
+exec swayidle -w timeout 300 'loginctl lock-session' timeout 1800 'systemctl suspend-then-hibernate'
 exec_always swaybg -i ~/.wallpaper.png
 exec_always dunst
 
