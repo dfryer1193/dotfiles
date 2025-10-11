@@ -13,5 +13,12 @@
 [user]
   email = dfryer1193@gmail.com
   name = David Fryer
+	signingkey = 335D8B9235329AC9
 [init]
 	defaultBranch = main
+[gpg]
+	program = gpg
+[commit]
+	gpgsign = true
+[tag]
+	gpgsign = true
