@@ -16,6 +16,10 @@ bindkey "^[[1~" beginning-of-line
 bindkey "^[[4~" end-of-line
 bindkey "^[[3~" delete-char
 
+autoload -Uz compinit && compinit
+
+eval "$(op completion zsh)"; compdef _op op
+
 if [[ -e $HOME/.workrc ]] {
   source $HOME/.workrc
 }
@@ -23,6 +27,10 @@ if [[ -e $HOME/.workrc ]] {
 if [[ -e $HOME/.zsh_aliases ]] {
   source $HOME/.zsh_aliases
 }
+
+if [ -f ~/.gnupg/gpg-agent.env ]; then
+  source ~/.gnupg/gpg-agent.env
+fi
 
 # Turn on tab completion
 autoload -Uz compinit && compinit
