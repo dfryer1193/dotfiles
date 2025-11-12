@@ -1,4 +1,3 @@
-eval $(thefuck --alias)
 alias ls='ls --color=always -lvhBFG'
 alias tree='tree -C'
 alias plz='sudo $(fc -ln -1)'
