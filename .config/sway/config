@@ -173,6 +173,7 @@ bindsym $win+L exec ~/.bin/screenlock.sh
 bindsym $mod+Control+L exec ~/.bin/screenlock.sh
 
 bindsym $win+space exec "tofi-drun --drun-launch=true"
+bindsym $win+Shift+space exec "1password --quick-access"
 bindsym $win+Return exec "grimshot --notify save active $HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d.%H-%M-%S).png"
 bindsym $win+Control+Return exec "grimshot --notify save area $HOME/Pictures/screenshots/screenshot-$(date +%Y-%m-%d.%H-%M-%S).png"
 
