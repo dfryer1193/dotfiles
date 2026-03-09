@@ -4,7 +4,7 @@
     "spacing": 4,
     "modules-left": ["sway/workspaces", "sway/scratchpad"],
     "modules-center": ["sway/window"],
-    "modules-right": ["custom/weather", "custom/packages", "disk", "temperature", "memory", "wireplumber", "clock", "network", "battery", "custom/audio_idle_inhibitor", "tray"],
+    "modules-right": ["custom/weather", "custom/packages", "disk", "temperature", "memory", "pulseaudio", "clock", "network", "battery", "custom/audio_idle_inhibitor", "tray"],
      "sway/workspaces": {
          "disable-scroll": true,
          "all-outputs": false,
@@ -53,8 +53,8 @@
         "scroll-step": 5,
         "format": "{icon} {volume}%",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+	"format-muted": " MUTE",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
