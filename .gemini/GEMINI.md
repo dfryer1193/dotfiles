@@ -471,8 +471,10 @@ These are mandatory for all projects.
         *   **Configuration Management:** Use **`pydantic`** for settings management. It provides the same benefits as `zod` for the Python ecosystem.
         *   **CLI Tooling:** For any Python-based CLIs, use **`Typer`** or **`Click`**. They provide a simple, declarative way to build robust command-line interfaces.
     *   **Go:**
-        *   **Configuration Management:** Use **`viper`** for handling configuration from files, environment variables, and flags.
         *   **CLI Tooling:** Use **`cobra`** to build powerful, modern CLI applications. It is the foundation of many popular tools like `kubectl` and `hugo`.
+        *   **Code Style:**
+            *   **Function Signatures:** Always explicitly type every argument. (Prefer `func foo(a string, b string, ...)` over `func foo(a, b string)`)
+            *   **Argument Lists:** When argument lists get long, put each argument on its own line.
 </details>
 
 <details>
