@@ -18,7 +18,9 @@ bindkey "^[[3~" delete-char
 
 autoload -Uz compinit && compinit
 
-eval "$(op completion zsh)"; compdef _op op
+if $(type op &>/dev/null) ; then
+  eval "$(op completion zsh)"; compdef _op op
+fi
 
 if [[ -e $HOME/.workrc ]] {
   source $HOME/.workrc
