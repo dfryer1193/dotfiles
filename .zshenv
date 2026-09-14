@@ -16,3 +16,4 @@ export GIT_FETCH_REMOTE_INFO=true
 export KUBECONFIG="$HOME/.kube/config"
 export PATH="/home/dfryer/.bun/bin:$PATH"
 export ZK_NOTEBOOK_DIR="$HOME/notes"
+export WORKSPACE_ROOT="$HOME/workspace"

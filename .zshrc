@@ -18,8 +18,6 @@ bindkey "^[[3~" delete-char
 
 autoload -Uz compinit && compinit
 
-eval "$(op completion zsh)"; compdef _op op
-
 if [[ -e $HOME/.workrc ]] {
   source $HOME/.workrc
 }
@@ -47,3 +45,9 @@ export ZSH_GIT_PROMPT_SHOW_STASH=1
 source $HOME/.zsh/git-prompt.zsh/git-prompt.zsh
 source $HOME/.zsh/git-prompt.zsh/examples/mine.zsh
 PROMPT='%B%(?.%F{green}[%F{white}.%F{red}[)%b%~%B%(?.%F{green}].%F{red}])%F{white}%b$(gitprompt) '
+
+if [[ -d "$HOME/.rc.d" ]]; then
+  for rc_file in $HOME/.rc.d/*; do
+    source $rc_file
+  done
+fi
