@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Prevent multiple concurrent instances of swaylock
+if pgrep -x swaylock >/dev/null; then
+    exit 0
+fi
+
 DUNST_STATE=$(dunstctl is-paused)
 
 dunstctl set-paused true

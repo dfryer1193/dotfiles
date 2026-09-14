@@ -21,8 +21,7 @@ set $warning    #e84f4f
 
 font pango:JetBrainsMono Nerd Font 10
 
-exec --no-startup-id xss-lock ~/.bin/screenlock.sh
-exec swayidle -w timeout 300 'loginctl lock-session' timeout 1800 'systemctl suspend-then-hibernate'
+exec swayidle -w
 exec_always swaybg -i ~/.wallpaper.png
 exec_always dunst
 
@@ -169,8 +168,8 @@ bindsym $mod+y fullscreen disable; floating enable; resize set 400 300; sticky e
 
 bindsym $mod+i exec --no-startup-id ~/.bin/bettertext.sh
 
-bindsym $win+L exec ~/.bin/screenlock.sh
-bindsym $mod+Control+L exec ~/.bin/screenlock.sh
+bindsym $win+L exec loginctl lock-session
+bindsym $mod+Control+L exec loginctl lock-session
 
 bindsym $win+space exec "tofi-drun --drun-launch=true"
 bindsym $win+Shift+space exec "1password --quick-access"
@@ -179,11 +178,11 @@ bindsym $win+Control+Return exec "grimshot --notify save area $HOME/Pictures/scr
 
 exec nm-applet
 exec blueman-applet
-exec lxsession
 exec libinput-gestures
 exec_always alacritty -t scratchpad -e tmux new-session -s SCRATCH
 exec udiskie -s
 exec waybar
+exec (cd ~/notes && /home/dfryer/.nvm/versions/node/v25.0.0/bin/ob sync --continuous &> ~/.local/state/obsidian-headless.log)
 
 # Window Modifications
 for_window [title="^scratchpad$"] move scratchpad

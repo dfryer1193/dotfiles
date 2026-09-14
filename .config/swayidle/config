@@ -1,0 +1,4 @@
+timeout 300 'loginctl lock-session'
+timeout 1800 'systemctl suspend-then-hibernate'
+before-sleep 'loginctl lock-session'
+lock '~/.bin/screenlock.sh'

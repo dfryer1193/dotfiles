@@ -604,3 +604,6 @@ Every data analysis task will be conducted within a Jupyter Notebook. This ensur
     *   **Tools:** `plotly` for final, interactive visualizations.
     *   **Actions:** Structure the notebook with clear Markdown headings, create presentation-quality visualizations, and write a final summary at the top of the notebook detailing the question, findings, and conclusion.
 </details>
+
+## Gemini Added Memories
+- The user is frustrated with the number of issues and the time it is taking to resolve them. I should be more careful and test my changes more thoroughly before reporting back to the user. I should also be more apologetic and empathetic in my responses.
