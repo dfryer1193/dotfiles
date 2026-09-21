@@ -143,7 +143,7 @@ show_status() {
   echo "Available profiles:"
   echo "  - default  : Linux Wayland desktop (Sway, Waybar, Alacritty, CLI tools)"
   echo "  - cli      : Headless / CLI-only setup (Shell, Neovim, Tmux, CLI tools)"
-  echo "  - mac      : macOS setup (Shell, Neovim, Tmux, Alacritty, future AeroSpace)"
+  echo "  - mac      : macOS setup (Shell, Neovim, Tmux, Alacritty, AeroSpace)"
 }
 
 # Subcommands

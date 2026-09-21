@@ -22,7 +22,7 @@ To activate or switch profiles, run `makelinks.sh` (or `dotprofile` if already l
 ### Profiles
 - **`default`**: Full Linux Wayland desktop setup (Sway, Waybar, Alacritty, Dunst, WirePlumber, and CLI tools).
 - **`cli`**: Headless / CLI-only setup (Shell, Neovim, Tmux, Git, and CLI utilities).
-- **`mac`**: macOS setup (Shell, Neovim, Tmux, Alacritty, and future AeroSpace support).
+- **`mac`**: macOS setup (Shell, Neovim, Tmux, Alacritty, and AeroSpace).
 
 ### Commands
 - `./makelinks.sh status` — Show active profile.
