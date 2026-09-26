@@ -10,6 +10,7 @@
   branch-name = "!git rev-parse --abbrev-ref HEAD"
   fpush = push --force-with-lease
   pushb = "!git push -u origin $(git branch-name)"
+	sign = "!f() { git rebase \"$1\" --committer-date-is-author-date --exec 'GIT_COMMITTER_DATE=\"$(git log -1 --format=%cI HEAD)\" git commit --amend --no-edit -S --date=\"$(git log -1 --format=%aI HEAD)\"'; }; f"
 [user]
   email = dfryer1193@gmail.com
   name = David Fryer
