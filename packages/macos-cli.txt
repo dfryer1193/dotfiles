@@ -1,0 +1,7 @@
+bat
+fzf
+git
+neovim
+ripgrep
+tmux
+zsh
